@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "acessoController";
+$route['default_controller'] = "clienteController";
 $route['404_override'] = '';
 
 

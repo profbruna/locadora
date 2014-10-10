@@ -1,0 +1,21 @@
+.tabela{
+    width: 900px;
+    margin:0 auto;
+    box-shadow: 0px 0px 10px gray;
+    -webkit-box-shadow: 0px 0px 10px gray;
+    -moz-box-shadow: 0px 0px 10px gray;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    border-top: 1px solid gray;
+    
+}
+.tabela tr th{
+    border-bottom: 1px solid #ccc;
+    background: #E8E8E8;
+    font-variant: small-caps;
+    text-shadow: 2px 2px 2px #ccc;
+}
+.tabela tr td{
+    border-bottom: 1px solid #ccc;
+    border-left: 3px solid #FFF;
+}

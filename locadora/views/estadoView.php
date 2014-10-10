@@ -13,7 +13,7 @@
         <link href="http://127.0.0.1/codeigniter/application/views/css/bootstrap.css" rel="stylesheet" type="text/css"/>  
         <link href="http://127.0.0.1/codeigniter/application/views/css/estilo.css" rel="stylesheet" type="text/css"/>
         <!-- TWITTER BOOTSTRAP JS --> 
-        <script src="http://127.0.0.1/codeigniter/application/views/jquery/js/bootstrap.min.js"></script> 
+        <!--<script src="http://127.0.0.1/codeigniter/application/views/jquery/js/bootstrap.min.js"></script>--> 
 
 
     </head>

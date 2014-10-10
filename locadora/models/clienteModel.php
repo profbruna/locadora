@@ -2,7 +2,10 @@
 class clienteModel extends CI_Model{
     function listarTudo($limite = 100, $start = 0){
         $this->db->limit($limite, $start);
-        $query = $this->db->get('cliente');
+        $this->db->select('cliente.*,cidade.nome as cidade_nome');
+        $this->db->from('cliente');
+        $this->db->join('cidade', 'cidade.codigo=cliente.cidade_codigo');
+        $query = $this->db->get();
         return $query->result();
     }
     function contarTudo(){

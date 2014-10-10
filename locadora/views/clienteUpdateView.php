@@ -90,7 +90,7 @@
                                 echo form_input('email', set_value('email', @$cliente->email), 'size="50" class="campo"');
                                 echo br();
                                 
-                                echo form_label("Cidade_código:");
+                                echo form_label("Cidade:");
                                 echo form_input('cidade_codigo', set_value('cidade_codigo', @$cliente->cidade_codigo), 'size="50" class="campo"');
                                 echo br();
 

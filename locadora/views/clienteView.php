@@ -46,13 +46,13 @@
                             </div>
                             <?php
                         }
-                        $this->table->set_heading('Nome', 'Endereço', 'Cpf', 'Rg', 'Telefone', 'E-mail', 'Cidade_código', 'Ações');
+                        $this->table->set_heading('Nome', 'Endereço', 'Cpf', 'Rg', 'Telefone', 'E-mail', 'Cidade', 'Ações');
                         foreach ($clientes as $p) {
                             $link_alterar = anchor("clienteController/alterar_cliente/$p->codigo", 'Editar', 'title="Editar"');
                             $link_eliminar = anchor("clienteController/eliminar_cliente/$p->codigo", 'Excluir', 'title="Excluir"');
                             $link_listar = anchor("cidadeController/index/$p->codigo", 'Cidades', 'title="Listar Cidades"');
                           
-                            $this->table->add_row($p->nome, $p->endereco, $p->cpf, $p->rg, $p->telefone, $p->email, $p->cidade_codigo,"$link_alterar $link_eliminar $link_listar ");
+                            $this->table->add_row($p->nome, $p->endereco, $p->cpf, $p->rg, $p->telefone, $p->email, $p->cidade_codigo.' - '.$p->cidade_nome,"$link_alterar $link_eliminar $link_listar ");
                         }
                         ?>
 

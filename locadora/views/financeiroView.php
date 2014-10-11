@@ -1,10 +1,10 @@
-
+<meta charset="UTF-8"/>
 <html>
     
 
     <head>
         <title></title>
-       <link rel="stylesheet" href="http://127.0.0.1/locadora/application/views/css/estilo.css" type="text/css"/> </head>
+       <link rel="stylesheet" href="http://127.0.0.1/locadora/locadora/views/css/estilo.css" type="text/css"/> </head>
 <body>
     <?php 
      echo anchor("financeiroController/novo", "Inserir",'class="novo"');

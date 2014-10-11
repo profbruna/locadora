@@ -2,7 +2,7 @@
     <head>
         <title></title>
          <meta charset="utf-8"/>
-        <link rel="stylesheet" href="http://127.0.0.1/locadora/application/views/css/estilo.css" type="text/css"/>
+        <link rel="stylesheet" href="http://127.0.0.1/locadora/locadora/views/css/estilo.css" type="text/css"/>
     </head>
     <body>
          <?php 

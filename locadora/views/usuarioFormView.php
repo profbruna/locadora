@@ -2,7 +2,7 @@
     <head>
         <title><?php echo $titulo; ?>  </title>
         <meta charset="utf-8"/>
-        <link rel="stylesheet" href="http://127.0.0.1/codeingnate/application/views/css/estilo.css" type="text/css"/>
+        <link rel="stylesheet" href="http://127.0.0.1/locadora/locadora/views/css/estilo.css" type="text/css"/>
          
     </head>
     <body>
@@ -24,19 +24,19 @@
         echo br();
 
         echo form_label("Login: ");
-        echo form_input('login', '', 'size="5" class="campo" ');
+        echo form_input('login', '', 'size="10" class="campo"  required ');
         echo br();
 
         echo form_label("E-mail: ");
-        echo form_input('email', '', 'size="50" class="campo"');
+        echo form_input('email', '', 'size="50" class="campo"  required');
         echo br();
 
         echo form_label("Senha: ");
-        echo form_password('senha', '', 'size="10"  class="campo" required');
+        echo form_password('senha', '', 'size="30"  class="campo" required');
         echo br();
 
         echo form_label("Inativo: ");
-        echo form_input('inativo', '', 'size="1" class="campo" required');
+        echo form_input('inativo', '', 'size="1" class="campo" required ');
         echo br();
 
   

@@ -13,13 +13,13 @@ class usuarioController extends CI_Controller {
         $dados = array(
             'usuarios' => $this->usuarioModel->listarTudo(numRegPagina(), $pagina),
             'paginacao' => criaPaginacao('usuarioController', $this->usuarioModel->contarTudo(),$this->uri->segment(3),3),
-            'titulo' => "Lista de Usuarios ");
+            'titulo' => "Lista de Usuários ");
         $this->load->view('usuarioView', $dados);
     }
 
     function novo() {
         $this->load->model('usuarioModel');
-        $dados['titulo'] = "Cadastro de Usuario";
+        $dados['titulo'] = "Cadastro de Usuário";
         $this->load->view('usuarioFormView', $dados);
         
     }
@@ -33,7 +33,7 @@ class usuarioController extends CI_Controller {
             'inativo' => $this->input->post('inativo'),
         );
   
-        if ($this->usuarioModel->inserir($inf)) {
+        if ($this->usuarioModel->inserir_usuario($inf)) {
             
             $this->session->set_flashdata('msg', 'Criado com sucesso!');
             redirect('usuarioController');
@@ -43,7 +43,7 @@ class usuarioController extends CI_Controller {
     }
      function alterar_usuario($codigo) {
         $this->load->model('usuarioModel');
-        $dados['titulo'] = "Alteração de usuario";
+        $dados['titulo'] = "Alteração de Usuário";
         $dados['usuario'] = $this->usuarioModel->buscar_pelo_codigo($codigo);
 
         $this->form_validation->set_rules('nome', 'nome', 'trim');
@@ -56,7 +56,7 @@ class usuarioController extends CI_Controller {
         if ($this->form_validation->run()) {
             
             
-           if($this->usuarioModel->alterar($_POST)){
+           if($this->usuarioModel->alterar_usuario($_POST)){
                $this->session->set_flashdata('msg', 'Alterado com sucesso!');
                redirect('usuarioController');
             
@@ -68,7 +68,7 @@ class usuarioController extends CI_Controller {
     function eliminar_usuario() {
         $this->load->model('usuarioModel');
         
-            if ($this->usuarioModel->eliminar()) {
+            if ($this->usuarioModel->eliminar_usuario()) {
                 
                 $this->session->set_flashdata('msg', 'Eliminado com sucesso!');
                 redirect('usuarioController');

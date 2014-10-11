@@ -10,10 +10,10 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
         <script>window.jQuery || document.write('<script src="js/jquery-1.7.1.min.js"><\/script>')</script> 
         <!-- TWITTER BOOTSTRAP CSS --> 
-        <link href="http://127.0.0.1/codeigniter/application/views/css/bootstrap.css" rel="stylesheet" type="text/css"/>  
-        <link href="http://127.0.0.1/codeigniter/application/views/css/estilo.css" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo base_url('locadora/views/css/bootstrap.css') ?>" rel="stylesheet" type="text/css"/>  
+        <link href="<?php echo base_url('locadora/views/css/estilo.css') ?>" rel="stylesheet" type="text/css"/>
         <!-- TWITTER BOOTSTRAP JS --> 
-        <script src="http://127.0.0.1/codeigniter/application/views/jquery/js/bootstrap.min.js"></script> 
+        <script src="<?php echo base_url('locadora/views/jquery/js/bootstrap.min.js') ?>"></script> 
 
 
     </head>
@@ -46,13 +46,13 @@
                             </div>
                             <?php
                         }
-                        $this->table->set_heading('Nome', 'Endereço', 'Cpf', 'Rg', 'Telefone', 'E-mail', 'Cidade_código', 'Ações');
+                        $this->table->set_heading('Nome', 'Endereço', 'Cpf', 'Rg', 'Telefone', 'E-mail', 'Cidade', 'Ações');
                         foreach ($clientes as $p) {
                             $link_alterar = anchor("clienteController/alterar_cliente/$p->codigo", 'Editar', 'title="Editar"');
                             $link_eliminar = anchor("clienteController/eliminar_cliente/$p->codigo", 'Excluir', 'title="Excluir"');
                             $link_listar = anchor("cidadeController/index/$p->codigo", 'Cidades', 'title="Listar Cidades"');
                           
-                            $this->table->add_row($p->nome, $p->endereco, $p->cpf, $p->rg, $p->telefone, $p->email, $p->cidade_codigo,"$link_alterar $link_eliminar $link_listar ");
+                            $this->table->add_row($p->nome, $p->endereco, $p->cpf, $p->rg, $p->telefone, $p->email, $p->cidade_codigo.' - '.$p->cidade_nome,"$link_alterar $link_eliminar $link_listar ");
                         }
                         ?>
 

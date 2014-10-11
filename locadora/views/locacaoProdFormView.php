@@ -36,8 +36,11 @@
             echo form_fieldset('Informações da Locação','class="col-sm-6 col-sm-offset-3 control-label"');
 
             echo form_label("Locação Código:");
-            echo form_input('locacao_codigo', '', 'size="50" class="form-control" ');
+            echo form_input('locacao_codigo',  set_value('locacao_codigo',$this->uri->segment(3)),  'class="form-control" readonly="true"');
             echo br();
+            
+            /*echo form_dropdown('estado_codigo', $listagem, set_value('estado_codigo', @$estadoAtual), 'required');
+                        }*/
 
             echo form_label("Produto Código:");
             echo form_input('produto_codigo', '', 'size="5" class="form-control"');

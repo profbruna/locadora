@@ -26,44 +26,33 @@
     <body>
         <div class="container">
             <?php
+            
             $codigo = 0;
             $codigo = @$loc->codigo;
-            echo form_open('locacaoController/alterar_locacao/' . $codigo);
-            echo form_fieldset('Informações da Locação', 'class="col-sm-6 col-sm-offset-3 control-label"');
+            echo form_open('locacaoProdController/alterar_produto/' . $codigo);
+            echo form_fieldset('Informações do Produto','class="col-sm-6 col-sm-offset-3 control-label"');
 
-            $data = implode('/', array_reverse(explode('-', @$loc->data)));
-            echo form_label("Data:");
-            echo form_input('data', set_value('data', $data), 'size="10" id="datepicker" class="form-control"');
+            
+            echo form_label("Locação Código:");
+            echo form_input('locacao_codigo', set_value('locacao_codigo', @$loc->locacao_codigo), 'size="10" class="form-control"');
             echo br();
 
-            echo form_label("Valor:");
-            echo form_input('valor', set_value('valor', @$loc->valor), 'size="5" class="form-control"');
+            echo form_label("Produto Código:");
+            echo form_input('produto_codigo', set_value('produto_codigo', @$loc->produto_codigo), 'size="5" class="form-control"');
             echo br();
 
-            echo form_label("Observações:");
-            echo form_input('observacoes', set_value('observacoes', @$loc->idade), 'size="5" class="form-control"');
+            echo form_label("Quantidade:");
+            echo form_input('quantidade', set_value('quantidade', @$loc->quantidade), 'size="5" class="form-control"');
             echo br();
 
-            $lista = array('Selecione um Cliente');
-            foreach ($clientes as $c) {
-                $lista[$c->codigo] = $c->nome;
-            }
-            echo form_label("Cliente Código:");
-            echo form_dropdown('cliente_codigo', $lista , (@$loc->cliente_codigo), 'class="form-control"');
+            $datadevolucao = implode('/', array_reverse(explode('-', $p->data_devolucao)));
+            echo form_label("Data Devolução:");
+            echo form_input('data_devolucao', set_value('data_devolucao', $datadevolucao), 'size="10" class="form-control"');
             echo br();
 
-            /* $listagem = array('' => 'Selecione um estado');
-              foreach ($estados as $p) {
-              $listagem[$p->codigo] = "$p->codigo - $p->nome";
-              } */
-
-
-            echo form_label("Condição de Pagamento:");
-            echo form_input('condicao_pagamento_codigo', set_value('condicao_pagamento_codigo', @$loc->condicao_pagamento_codigo), 'size="50" class="form-control"');
-            echo br();
-
+            
             echo form_submit('submit', 'Enviar', 'class="btn btn-success"');
-            echo anchor("locacaoController/", "Cancelar", 'class="btn btn-danger"');
+            echo anchor("locacaoProdController/", "Cancelar", 'class="btn btn-danger"');
 
             echo form_fieldset_close();
             echo form_close();

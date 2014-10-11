@@ -20,7 +20,8 @@ class locacaoController extends CI_Controller {
 
     function novo() {
         $dados['titulo'] = "Cadastro de Locações";
-
+        $this->load->model('clienteModel');
+        $dados['clientes'] = $this->clienteModel->listarTudo();
       
         $this->load->view('locacaoFormView', $dados);
     }
@@ -64,8 +65,11 @@ class locacaoController extends CI_Controller {
     function alterar_locacao($codigo) {
         $this->load->model('locacaoModel');
         $dados['titulo'] = "Alteração de Locação";
+        $this->load->model('clienteModel');
+        $dados['clientes'] = $this->clienteModel->listarTudo();
         $dados['loc'] = $this->locacaoModel->buscar_pelo_codigo($codigo);
 
+       
         $this->form_validation->set_rules('data', 'data', 'trim|required');
         $this->form_validation->set_rules('valor', 'valor', 'trim|required');
         $this->form_validation->set_rules('observacoes', 'observacoes', 'trim|required');
@@ -89,13 +93,13 @@ class locacaoController extends CI_Controller {
 
     function excluir_locacao($codigo) {
         $this->load->model('locacaoModel');
-        $num = $this->locacaoModel->contarTudo($codigo);
-        if ($num == 0) {
+        
+        
             if ($this->locacaoModel->excluir()) {
                 $this->session->set_flashdata('msg', 'Excluído com Sucesso');
                 redirect('locacaoController');
             }
-        } else {
+         else {
             $this->session->set_flashdata('msg', 'Não foi possível excluir.');
             redirect('locacaoController');
         }

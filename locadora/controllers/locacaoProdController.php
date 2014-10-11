@@ -20,13 +20,12 @@ class locacaoProdController extends CI_Controller {
 
     function novo() {
         $dados['titulo'] = "Cadastro de Locação de Produtos";
-
-      
         $this->load->view('locacaoProdFormView', $dados);
     }
 
     function inserir_produto() {
         $this->load->model('locacaoProdModel');
+        
         $dados = array(
             'locacao_codigo' => $this->input->post('locacao_codigo'),
             'produto_codigo' => $this->input->post('produto_codigo'),

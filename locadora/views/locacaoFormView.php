@@ -48,7 +48,12 @@
             echo br();
 
             echo form_label("Cliente Código: ");
-            echo form_input('cliente_codigo', '', 'size="10" class="form-control" ');
+            $lista = array();
+            $lista[0] = "Selecione um cliente";
+            foreach ($clientes as $c){
+                $lista[$c->codigo] = $c->nome;
+            }
+            echo form_dropdown('cliente_codigo', $lista,'',  'class="form-control" ');
             echo br();
 
             echo form_label("Condição de Pagamento:");

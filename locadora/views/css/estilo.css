@@ -13,19 +13,19 @@
 table{
     /*    max-width: 1170px;
         min-width: 900px;  */
-    width: 900px;
+    width: 1030px;
     margin: 0 auto;
-    box-shadow: 0px 0px 10px gray;
-    -webkit-box-shadow: 0px 0px 10px gray;
-    -moz-box-shadow: 0px 0px 10px gray;
+    box-shadow: 0px 0px 10px #003333;
+    -webkit-box-shadow: 0px 0px 10px #003333;
+    -moz-box-shadow: 0px 0px 10px #003333;
 }
 table tr th{
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #6666ff;
     background: #e8e8e8;
     font-variant: small-caps;
-    text-shadow: 2px 2px 2px #ccc;
-    -moz-box-shadow: 2px 2px 2px #ccc;
-    -webkit-box-shadow: 2px 2px 2px #ccc;
+    text-shadow: 2px 2px 2px #999999;
+    -moz-box-shadow: 2px 2px 2px #cccccc;
+    -webkit-box-shadow: 2px 2px 2px #cccccc;
 }
 tbody tr:hover > td,
 tbody tr:hover > th {
@@ -33,8 +33,8 @@ tbody tr:hover > th {
 }
 
 table tr td{
-    border-bottom: 1px solid #ccc;
-    border-left: 3px solid #fff;
+    border-bottom: 1px solid grey;
+    border-left: 1px solid grey;
     text-align: center;
 }
 .ajuste{
@@ -53,13 +53,13 @@ fieldset{
     margin: 0 auto;
     padding-left: 50px;
     padding-right: 50px;
-    width:300px;   
-    border-bottom: 1px solid #ccc;
+    width:400px;   
+    border-bottom: 1px solid #999999;
     background: #e8e8e8;
     font-variant: small-caps;
-    text-shadow: 2px 2px 2px #ccc;
-    -moz-box-shadow: 2px 2px 2px #ccc;
-    -webkit-box-shadow: 2px 2px 2px #ccc;
+    text-shadow: 2px 2px 2px #999999;
+    -moz-box-shadow: 2px 2px 2px #999999;
+    -webkit-box-shadow: 2px 2px 2px #999999;
 }
 .movimento{
     width: 300px;

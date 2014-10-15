@@ -22,6 +22,7 @@ class locacaoController extends CI_Controller {
         $dados['titulo'] = "Cadastro de Locações";
         $this->load->model('clienteModel');
         $dados['clientes'] = $this->clienteModel->listarTudo();
+        $dados['condicoes'] = $this->condicao_pagamentoModel->listarTudo();
       
         $this->load->view('locacaoFormView', $dados);
     }

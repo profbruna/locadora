@@ -20,13 +20,13 @@
 
         $tmpl = array('table_open' => '<table class="table table-striped">');
 
-        $this->table->set_heading('Data', 'Valor', 'ObservaÃ§Ãµes', 'Cliente CÃ³digo', 'CondiÃ§Ã£o de Pagamento',  'AÃ§Ãµes');
+        $this->table->set_heading('Data', 'Valor', 'Observações', 'Cliente', 'Condição de Pagamento',  'Ações');
         foreach(@$locacoes as $l) {
 
             $alterar = anchor("locacaoController/alterar_locacao/$l->codigo", "Alterar" ,'class="btn btn-xs btn-primary"');
             $excluir = anchor("locacaoController/excluir_locacao/$l->codigo", "Excluir",'class="btn btn-xs btn-danger"');
             $inserirProd = anchor("locacaoProdController/novo/$l->codigo", "Inserir Produto",'class="btn btn-xs btn-danger"');
-            $listarProd = anchor("locacaoProdController/index/".$this->uri->segment(3), "Listar Produtos",'class="btn btn-xs btn-danger"');
+            $listarProd = anchor("locacaoProdController/index/$l->codigo", "Listar Produtos",'class="btn btn-xs btn-danger"');
             $financeiro = anchor("financeiroController/index/$l->codigo", "Financeiro",'class="btn btn-xs btn-danger"');
             
            

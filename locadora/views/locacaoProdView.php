@@ -15,7 +15,7 @@
             echo $this->session->flashdata('msg');
         }
 
-        echo anchor("locacaoProdController/novo", "Inserir",'class="btn btn-xs btn-primary"');
+        echo anchor("locacaoProdController/novo/".$this->uri->segment(3), "Inserir",'class="btn btn-xs btn-primary"');
 
 
         $tmpl = array('table_open' => '<table class="table table-striped">');

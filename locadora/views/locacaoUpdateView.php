@@ -8,9 +8,10 @@
         <script type="text/javascript" src="http://127.0.0.1/locadora/includes/jquery/js/jquery-1.9.1.js"></script>
         <script type="text/javascript" src="http://127.0.0.1/locadora/includes/jquery/js/jquery-ui.js"></script>
         <script type="text/javascript" src="http://127.0.0.1/locadora/includes/jquery/js/jquery.maskMoney.js"></script>
+        <script type="text/javascript" src="http://127.0.0.1/locadora/includes/jquery/js/jquery-ui-timepicker-addon.js"></script>
         <script type="text/javascript">
             $(document).ready(function(e) {
-                $("#datepicker").datepicker({
+                $("#datepicker").datetimepicker({
                     dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
                     dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
                     dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
@@ -18,7 +19,11 @@
                     monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
                     dateFormat: 'dd/mm/yy',
                     nextText: 'Próximo',
-                    prevText: 'Anterior'
+                    prevText: 'Anterior',
+                    timeFormat: 'HH:mm:ss',
+                    stepHour: 2,
+                    stepMinute: 10,
+                    stepSecond: 10
                 });
             });
         </script>
@@ -31,9 +36,12 @@
             echo form_open('locacaoController/alterar_locacao/' . $codigo);
             echo form_fieldset('Informações da Locação', 'class="col-sm-6 col-sm-offset-3 control-label"');
 
-            $data = implode('/', array_reverse(explode('-', @$loc->data)));
+            //$data = implode('/', array_reverse(explode('-', @$loc->data)));
+            $data  = substr($loc->data, 0, 10);
+            $hora = substr($loc->data, 11, 8);
+            $data = implode('/', array_reverse(explode('-', $data)));
             echo form_label("Data:");
-            echo form_input('data', set_value('data', $data), 'size="10" id="datepicker" class="form-control"');
+            echo form_input('data', set_value('data', $data . ' ' . $hora), 'size="10" id="datepicker" class="form-control"');
             echo br();
 
             echo form_label("Valor:");
@@ -41,7 +49,7 @@
             echo br();
 
             echo form_label("Observações:");
-            echo form_input('observacoes', set_value('observacoes', @$loc->idade), 'size="5" class="form-control"');
+            echo form_input('observacoes', set_value('observacoes', @$loc->observacoes), 'size="5" class="form-control"');
             echo br();
 
             $lista = array('Selecione um Cliente');
@@ -49,7 +57,7 @@
                 $lista[$c->codigo] = $c->nome;
             }
             echo form_label("Cliente Código:");
-            echo form_dropdown('cliente_codigo', $lista , (@$loc->cliente_codigo), 'class="form-control"');
+            echo form_dropdown('cliente_codigo', $lista, (@$loc->cliente_codigo), 'class="form-control"');
             echo br();
 
             /* $listagem = array('' => 'Selecione um estado');

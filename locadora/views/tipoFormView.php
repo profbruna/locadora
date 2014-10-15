@@ -62,8 +62,8 @@
                             echo $this->session->flashdata('msg');
                         }
 
-                        echo form_open('generoController/inserir_genero');
-                        echo form_fieldset('Informações dos Gêneros');
+                        echo form_open('tipoController/inserir_tipo');
+                        echo form_fieldset('Informações dos Tipos');
 
                         echo form_label("Nome: ");
                         echo form_input('nome', '', 'size="8" class="campo" required');

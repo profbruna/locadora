@@ -61,12 +61,15 @@
                         if ($this->session->flashdata('msg')) {
                             echo $this->session->flashdata('msg');
                         }
+                        
+                        $codigo = 0;
+                        $codigo = @$genero->codigo;
 
-                        echo form_open('generoController/inserir_genero');
+                        echo form_open('generoController/alterar_genero/'.$codigo);
                         echo form_fieldset('Informações dos Gêneros');
 
                         echo form_label("Nome: ");
-                        echo form_input('nome', '', 'size="8" class="campo" required');
+                        echo form_input('nome', set_value('nome', @$genero->nome), 'size="8" class="campo" required');
                         echo br();
 
                         echo form_submit('submit', 'Enviar', 'class="botao1"');

@@ -2,7 +2,6 @@
 
 class generoController extends CI_Controller {
 
-/************PESQUISAR SE É NECESSÁRIO A UTILIZAÇÃO DESSE 'PUBLIC' *******
       public function index() {
         $this->listar();
     }
@@ -11,13 +10,13 @@ class generoController extends CI_Controller {
         $this->load->model('generoModel');
         $pagina = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
         $dados = array(
-            'genero' => $this->generoModel->listarTudo(numRegPagina(), $pagina),
+            'classificacoes' => $this->generoModel->listarTudo(numRegPagina(), $pagina),
             'paginacao' => criaPaginacao(
                     'generoController', $this->generoModel->contarTudo(), $this->uri->segment(3), 4),
-            'titulo' => "Lista de Gêneros");
+            'titulo' => "Lista de Classificações");
         $this->load->view('generoView', $dados);
     }
-*/
+
     function novo() {
         $this->load->model('generoModel');
         $this->load->model('generoModel');
@@ -29,7 +28,6 @@ class generoController extends CI_Controller {
     function inserir_genero() {
         $this->load->model('generoModel');
         $inf = array(
-            'codigo' => $this->input->post('codigo'),
             'nome' => $this->input->post('nome'),
         );
 
@@ -43,20 +41,20 @@ class generoController extends CI_Controller {
 
     function alterar_genero($codigo) {
         $this->load->model('generoModel');
-        $dados['titulo'] = "Alteração de Gêneros";
+        $dados['titulo'] = "Alteração de Classificação";
         $this->load->model('generoModel');
                
         $dados['genero'] = $this->generoModel->buscar_pelo_codigo($codigo);
 
-        $this->form_validation->set_rules('codigo', 'codigo', 'trim');
         $this->form_validation->set_rules('nome', 'nome', 'trim');
         if ($this->form_validation->run()) {
             $_POST['codigo'] = $codigo;
             if ($this->generoModel->alterar($_POST)) {
                 $this->session->set_flashdata('msg', 'Alterado com sucesso!');
-
+                redirect('generoController/index');
             }
         }
+        $this->load->view('generoUpdateView', $dados);
 
     }
 
@@ -66,7 +64,7 @@ class generoController extends CI_Controller {
         $del = $this->generoModel->eliminar();
         if ($del > 0) {
             $this->session->set_flashdata('msg', 'Eliminado com sucesso!');
-            redirect('generoModel/index');
+            redirect('generoController/index');
         }
     }
 

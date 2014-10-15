@@ -4,9 +4,9 @@
  
 class financeiroModel extends CI_Model {
     
-    function listarTudo($limite = 100, $start=0){
+    function listarTudo($limite = 100, $start=0, $locacao){
         $this->db->limit($limite, $start);
-        
+        $this->db->where('locacao_codigo', $locacao);
         $query = $this->db->get('financeiro');
         
         //indicando a tabela para buscar os dados
@@ -50,13 +50,18 @@ class financeiroModel extends CI_Model {
         return $this->db->affected_rows();
     }
     
-    function eliminar_financeiro(){
-        $this->db->where('codigo', $this->uri->segment(3));
+    function eliminar_financeiro($codigo){
+        $this->db->where('codigo', $codigo);
         $this->db->delete('financeiro');
         return $this->db->affected_rows();
     }
     function buscar_pelo_codigo($codigo){
         $this->db->where('codigo', $codigo);
+        $query = $this->db->get('financeiro');
+        return $query->row(0);
+    }
+    function buscar_pela_locacao($locacao){
+        $this->db->where('locacao_codigo', $locacao);
         $query = $this->db->get('financeiro');
         return $query->row(0);
     }

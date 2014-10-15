@@ -56,9 +56,8 @@
          echo form_label("Locação Código: ");
          echo form_input('locacao_codigo', '', 'size="10" class="campo" required');
         echo br();
-       
-         
-         
+        echo br();
+      
 
         echo form_submit('submit', 'Enviar', 'class="botao1"');
         echo form_reset('reset', 'Limpar');

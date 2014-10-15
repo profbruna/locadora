@@ -47,20 +47,19 @@
                             <?php
                         }
 
-                        
                         $this->table->set_heading('Código', 'Nome', 'Ações');
-                        foreach ($classificacaos as $c) {
-                            $link_alterar = anchor("classificacaoController/alterar_cidade/$c->codigo", 'Editar', 'title="Editar"');
-                            $link_eliminar = anchor("classificacaoController/eliminar_cidade/$c->codigo", 'Excluir', 'title="Excluir"');                   
+                        foreach ($classificacoes as $c) {
+                            $link_alterar = anchor("classificacaoController/alterar_classificacao/$c->codigo", 'Editar', 'title="Editar"');
+                            $link_eliminar = anchor("classificacaoController/eliminar_classificacao/$c->codigo", 'Excluir', 'title="Excluir"');                   
                         
-                            $this->table->add_row($c->codigo, $c->nome, "$link_alterar ");
+                            $this->table->add_row($c->codigo, $c->nome, "$link_alterar  $link_eliminar");
                         }
                         
                         ?>
                         
                         <div id="menu">
                             <ul class="nav nav-tabs nav-stacked"> 
-                                <li><?php echo anchor("cidadeController/novo", 'Inserir'); ?></li>                       
+                                <li><?php echo anchor("classificacaoController/novo", 'Inserir'); ?></li>                       
                             </ul>
                             
                         </div>

@@ -61,12 +61,15 @@
                         if ($this->session->flashdata('msg')) {
                             echo $this->session->flashdata('msg');
                         }
+                        
+                        $codigo = 0;
+                        $codigo = @$classificacao->codigo;
 
-                        echo form_open('classificacaoController/inserir_classificacao');
+                        echo form_open('classificacaoController/alterar_classificacao/'.$codigo);
                         echo form_fieldset('Informações dos Gêneros');
 
                         echo form_label("Nome: ");
-                        echo form_input('nome', '', 'size="8" class="campo" required');
+                        echo form_input('nome', set_value('nome', @$classificacao->nome), 'size="8" class="campo" required');
                         echo br();
 
                         echo form_submit('submit', 'Enviar', 'class="botao1"');

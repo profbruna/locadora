@@ -57,7 +57,12 @@
             echo br();
 
             echo form_label("Condição de Pagamento:");
-            echo form_input('condicao_pagamento_codigo', '', 'size="10" class="form-control"');
+            $listaCond = array();
+            $listaCond[0] = "Selecione uma Condição de Pagamento";
+            foreach ($condicoes as $c){
+                $listaCond[$c->codigo] = $c->condicao_pagamento_nome;
+            }
+            echo form_dropdown('condicao_pagamento_codigo', $listaCond,'','class="form-control"');
             echo br();
 
 

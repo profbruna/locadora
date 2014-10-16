@@ -3,33 +3,18 @@
 class classificacaoModel extends CI_Model {
 
    /*VERIFICAR SE É NECESSÁRIO ESSE TRECHO COMENTADO*/
- /*   function listarTudo($limite = 100, $start = 0){
+    function listarTudo($limite = 100, $start = 0){
         $this->db->limit($limite, $start);
-        $this->db->select('cidade.codigo, cidade.nome, '
-                . 'estado.nome as estado');
-        $this->db->from('cidade');
+        $this->db->select('*');
+        $this->db->from('classificacao');
 
-        if ($this->uri->segment(3)) {
-            $this->db->join('estado', 'estado.codigo = cidade.estado_codigo'
-                    . ' and estado.codigo = ' . $this->uri->segment(3));
-        } else {
-            $this->db->join('estado', ' estado.codigo = cidade.estado_codigo');
-        }
         $query = $this->db->get();
         return $query->result();
     }
     
     function contarTudo(){
-        $this->db->select('cidade.codigo, cidade.nome,'
-                . 'estado.nome');
-        $this->db->from('cidade');
-
-        if ($this->uri->segment(3)) {
-            $this->db->join('estado', 'estado.codigo = cidade.estado_codigo'
-                    . ' and estado.codigo = ' . $this->uri->segment(3));
-        } else {
-            $this->db->join('estado', ' estado.codigo = cidade.estado_codigo');
-        }
+        $this->db->select('*');
+        $this->db->from('classificacao');
         $this->db->get();
         return $this->db->affected_rows();
     
@@ -55,33 +40,30 @@ class classificacaoModel extends CI_Model {
 //        $query = $this->db->get();
 //        return $query->result();
 //    }
-*/
+
     function inserir($inf = array()) {
         $this->db->insert('classificacao', $inf);
         return $this->db->affected_rows();
     }
 
     function alterar($dados = array()) {
-        if (isset($dados['codigo'])) {
-            $this->db->set('codigo', $dados['codigo']);
-        }
         if (isset($dados['nome'])) {
             $this->db->set('nome', $dados['nome']);
         }
         $this->db->where('codigo', $this->uri->segment(3));
-        $this->db->update('nome');
+        $this->db->update('classificacao');
         return $this->db->affected_rows();
     }
 
     function eliminar() {
         $this->db->where('codigo', $this->uri->segment(3));
-        $this->db->delete('nome');
+        $this->db->delete('classificacao');
         return $this->db->affected_rows();
     }
 
     function buscar_pelo_codigo($codigo) {
         $this->db->where('codigo', $codigo);
-        $query = $this->db->get('nome');
+        $query = $this->db->get('classificacao');
         return $query->row(0);
     }
 

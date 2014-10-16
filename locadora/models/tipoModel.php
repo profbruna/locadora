@@ -1,12 +1,12 @@
 <?php
 
-class generoModel extends CI_Model {
+class tipoModel extends CI_Model {
 
    /*VERIFICAR SE É NECESSÁRIO ESSE TRECHO COMENTADO*/
     function listarTudo($limite = 100, $start = 0){
         $this->db->limit($limite, $start);
         $this->db->select('*');
-        $this->db->from('genero');
+        $this->db->from('tipo');
 
         $query = $this->db->get();
         return $query->result();
@@ -14,7 +14,7 @@ class generoModel extends CI_Model {
     
     function contarTudo(){
         $this->db->select('*');
-        $this->db->from('genero');
+        $this->db->from('tipo');
         $this->db->get();
         return $this->db->affected_rows();
     
@@ -42,7 +42,7 @@ class generoModel extends CI_Model {
 //    }
 
     function inserir($inf = array()) {
-        $this->db->insert('genero', $inf);
+        $this->db->insert('tipo', $inf);
         return $this->db->affected_rows();
     }
 
@@ -51,19 +51,19 @@ class generoModel extends CI_Model {
             $this->db->set('nome', $dados['nome']);
         }
         $this->db->where('codigo', $this->uri->segment(3));
-        $this->db->update('genero');
+        $this->db->update('tipo');
         return $this->db->affected_rows();
     }
 
     function eliminar() {
         $this->db->where('codigo', $this->uri->segment(3));
-        $this->db->delete('genero');
+        $this->db->delete('tipo');
         return $this->db->affected_rows();
     }
 
     function buscar_pelo_codigo($codigo) {
         $this->db->where('codigo', $codigo);
-        $query = $this->db->get('genero');
+        $query = $this->db->get('tipo');
         return $query->row(0);
     }
 

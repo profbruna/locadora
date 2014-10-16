@@ -39,11 +39,15 @@
             echo form_input('locacao_codigo',  set_value('locacao_codigo',$this->uri->segment(3)),  'class="form-control" readonly="true"');
             echo br();
             
-            /*echo form_dropdown('estado_codigo', $listagem, set_value('estado_codigo', @$estadoAtual), 'required');
-                        }*/
+            
 
-            echo form_label("Produto Código:");
-            echo form_input('produto_codigo', '', 'size="5" class="form-control"');
+            echo form_label("Produto:");
+            $listaProd = array();
+            $listaProd[0] = "Selecione um Produto";
+            foreach ($produtos as $p){
+                $lista[$p->codigo] = $p->nome;
+            }
+            echo form_dropdown('produto_codigo', $listaProd,'','class="form-control"');
             echo br();
 
             echo form_label("Quantidade:");

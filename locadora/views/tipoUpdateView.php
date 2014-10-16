@@ -61,12 +61,15 @@
                         if ($this->session->flashdata('msg')) {
                             echo $this->session->flashdata('msg');
                         }
+                        
+                        $codigo = 0;
+                        $codigo = @$tipo->codigo;
 
-                        echo form_open('generoController/inserir_genero');
-                        echo form_fieldset('Informações dos Gêneros');
+                        echo form_open('tipoController/alterar_tipo/'.$codigo);
+                        echo form_fieldset('Informações dos Tipos');
 
                         echo form_label("Nome: ");
-                        echo form_input('nome', '', 'size="8" class="campo" required');
+                        echo form_input('nome', set_value('nome', @$tipo->nome), 'size="8" class="campo" required');
                         echo br();
 
                         echo form_submit('submit', 'Enviar', 'class="botao1"');

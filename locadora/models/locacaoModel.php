@@ -4,7 +4,11 @@ class locacaoModel extends CI_Model {
 
     function listarTudo($limit = 100, $_start = 0) {
         $this->db->limit($limit, $_start);
-        $query = $this->db->get('locacao');
+        $this->db->select('locacao.*, cliente.nome as cliente_nome, condicao_pagamento.nome as condicao_pagamento_nome');
+        $this->db->from('locacao');
+        $this->db->join('cliente', ' cliente.codigo = locacao.cliente_codigo');
+        $this->db->join('condicao_pagamento', ' condicao_pagamento.codigo = locacao.condicao_pagamento_codigo');
+        $query = $this->db->get();
         return $query->result();
     }
 

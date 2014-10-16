@@ -2,7 +2,6 @@
 
 class classificacaoController extends CI_Controller {
 
-/************PESQUISAR SE É NECESSÁRIO A UTILIZAÇÃO DESSE 'PUBLIC' *******
       public function index() {
         $this->listar();
     }
@@ -11,13 +10,13 @@ class classificacaoController extends CI_Controller {
         $this->load->model('classificacaoModel');
         $pagina = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
         $dados = array(
-            'classificacao' => $this->classificacaoModel->listarTudo(numRegPagina(), $pagina),
+            'classificacoes' => $this->classificacaoModel->listarTudo(numRegPagina(), $pagina),
             'paginacao' => criaPaginacao(
                     'classificacaoController', $this->classificacaoModel->contarTudo(), $this->uri->segment(3), 4),
-            'titulo' => "Lista de Gêneros");
+            'titulo' => "Lista de Classificações");
         $this->load->view('classificacaoView', $dados);
     }
-*/
+
     function novo() {
         $this->load->model('classificacaoModel');
         $this->load->model('classificacaoModel');
@@ -27,9 +26,8 @@ class classificacaoController extends CI_Controller {
     }
 
     function inserir_classificacao() {
-        $this->load->model('classificacoModel');
+        $this->load->model('classificacaoModel');
         $inf = array(
-            'codigo' => $this->input->post('codigo'),
             'nome' => $this->input->post('nome'),
         );
 
@@ -43,20 +41,20 @@ class classificacaoController extends CI_Controller {
 
     function alterar_classificacao($codigo) {
         $this->load->model('classificacaoModel');
-        $dados['titulo'] = "Alteração de Gêneros";
+        $dados['titulo'] = "Alteração de Classificação";
         $this->load->model('classificacaoModel');
                
         $dados['classificacao'] = $this->classificacaoModel->buscar_pelo_codigo($codigo);
 
-        $this->form_validation->set_rules('codigo', 'codigo', 'trim');
         $this->form_validation->set_rules('nome', 'nome', 'trim');
         if ($this->form_validation->run()) {
             $_POST['codigo'] = $codigo;
             if ($this->classificacaoModel->alterar($_POST)) {
                 $this->session->set_flashdata('msg', 'Alterado com sucesso!');
-
+                redirect('classificacaoController/index');
             }
         }
+        $this->load->view('classificacaoUpdateView', $dados);
 
     }
 
@@ -66,7 +64,7 @@ class classificacaoController extends CI_Controller {
         $del = $this->classificacaoModel->eliminar();
         if ($del > 0) {
             $this->session->set_flashdata('msg', 'Eliminado com sucesso!');
-            redirect('classificacaoModel/index');
+            redirect('classificacaoController/index');
         }
     }
 

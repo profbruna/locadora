@@ -49,8 +49,8 @@
 
                         $this->table->set_heading('Código', 'Nome', 'Ações');
                         foreach ($classificacoes as $c) {
-                            $link_alterar = anchor("generoController/alterar_genero/$c->codigo", 'Editar', 'title="Editar"');
-                            $link_eliminar = anchor("generoController/eliminar_genero/$c->codigo", 'Excluir', 'title="Excluir"');                   
+                            $link_alterar = anchor("tipoController/alterar_tipo/$c->codigo", 'Editar', 'title="Editar"');
+                            $link_eliminar = anchor("tipoController/eliminar_tipo/$c->codigo", 'Excluir', 'title="Excluir"');                   
                         
                             $this->table->add_row($c->codigo, $c->nome, "$link_alterar  $link_eliminar");
                         }
@@ -59,7 +59,7 @@
                         
                         <div id="menu">
                             <ul class="nav nav-tabs nav-stacked"> 
-                                <li><?php echo anchor("generoController/novo", 'Inserir'); ?></li>                       
+                                <li><?php echo anchor("tipoController/novo", 'Inserir'); ?></li>                       
                             </ul>
                             
                         </div>

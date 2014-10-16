@@ -1,6 +1,15 @@
 .center{
     text-align: center;
 }
+#menu_topo{
+    width: 100%;
+    margin-left: 10%;
+    margin-bottom: -60px;
+    /*border: 0.1em solid red;*/
+}
+.container{
+    
+}
 #menu ul li{
     /*width: 50px;*/
     list-style-type:none;

@@ -28,7 +28,7 @@
                     <div class="navbar"> 
                         <div class="navbar-inner"> 
                             <div class="container"> 
-                                <h2 class="center">Cadastro de Clientes</h2> 
+                                <h2 class="center">Lista de Clientes</h2> 
                             </div> 
                         </div> 
                     </div> 
@@ -61,7 +61,7 @@
 
 
 
-                        <h3 class="center"> Lista de Clientes </h3> 
+                        <!--<h3 class="center"> Lista de Clientes </h3>--> 
                         <hr />
 
                         <?php

@@ -19,15 +19,15 @@
         echo anchor("condicao_pagamentoController/novo","Inserir",'class=""');
        
         
-            $this->table->set_heading('Código','Nome','Parcelas','Ações');
+            $this->table->set_heading('Código','Nome','Parcelas','Nº de Dias','Ações');
             
             foreach ($condicoes_pagamentos as $p){
                 $link_alterar = anchor("condicao_pagamentoController/alterar_condicao_pagamento/$p->codigo","Alterar");
                 $link_eliminar = anchor("condicao_pagamentoController/eliminar_condicao_pagamento/$p->codigo","Eliminar");
-                $link_listar = anchor("condicao_pagamentoController/index/$p->codigo","Listar Condição de Pagamento");
+                /*$link_listar = anchor("condicao_pagamentoController/index/$p->codigo","Listar Condição de Pagamento");*/
                 
                                                 
-                $this->table->add_row($p->codigo, $p->nome, $p->parcelas,"$link_alterar $link_eliminar $link_listar");
+                $this->table->add_row($p->codigo, $p->nome, $p->parcelas,$p->dias,"$link_alterar $link_eliminar");
                 
                 
             }

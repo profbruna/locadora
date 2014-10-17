@@ -31,7 +31,7 @@
         $codigo = 0;
         $codigo = @$condicao_pagamento->codigo;
         
-        
+     
         
         echo form_open("condicao_pagamentoController/alterar_condicao_pagamento/$codigo");
         echo form_fieldset('Informações Pessoais');
@@ -42,6 +42,10 @@
         echo form_label("Parcelas:");
         echo form_input('parcelas', set_value('parcelas', @$condicao_pagamento->parcelas), 'size="5" class="campo" required');
         echo br();
+        
+        echo form_label("Nº de Dias:");
+        echo form_input('dias', set_value('dias', @$condicao_pagamento->dias), 'size="5" class="campo" required');
+        echo br();
 
                 
         echo form_submit('submit','Enviar','class="botao1"');
@@ -50,6 +54,14 @@
         echo form_fieldset_close();
         echo form_close();
         echo anchor("condicao_pagamentoController/index/" ,"Condições de Pagamento", 'class=""');
+        
+        
+        echo '<div class="mensagem">';
+        if ($this->session->flashdata('msg')) {
+            echo $this->session->flashdata('msg');
+        }
+        echo '</div>';          
+        
         ?>
     </body>
 </html>

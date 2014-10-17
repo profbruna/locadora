@@ -2,7 +2,7 @@
 
 class generoController extends CI_Controller {
 
-      public function index() {
+    public function index() {
         $this->listar();
     }
 
@@ -21,41 +21,53 @@ class generoController extends CI_Controller {
         $this->load->model('generoModel');
         $this->load->model('generoModel');
         $dados['titulo'] = "Cadastro de Gêneros";
-       
+
         $this->load->view('generoFormView', $dados);
     }
 
     function inserir_genero() {
         $this->load->model('generoModel');
         $inf = array(
+            'codigo' => $this->input->post('codigo'),
             'nome' => $this->input->post('nome'),
         );
-
-        if ($this->generoModel->inserir($inf)) {
-            $this->session->set_flashdata('msg', 'Criado com sucesso!');
-            redirect('generoController/index');
+        if ($inf['nome'] == '0') {
+            $this->session->set_flashdata('msg', 'Campo "Nome" não pode ser preenchido com valor "0".');
         } else {
-            $this->session->set_flashdata('msg', 'Não consegui gravar!');
-        }
-    }
+            if ($this->generoModel->inserir($inf)) {
+                $this->session->set_flashdata('msg', 'Criado com sucesso!');
+                redirect('generoController/index');
+            } else {
+                $this->session->set_flashdata('msg', 'Não consegui gravar!');
+            }
+        }redirect('generoController/index' . $this->uri->segment(3));
+}
 
     function alterar_genero($codigo) {
         $this->load->model('generoModel');
         $dados['titulo'] = "Alteração de Classificação";
         $this->load->model('generoModel');
-               
-        $dados['genero'] = $this->generoModel->buscar_pelo_codigo($codigo);
 
+        $dados['genero'] = $this->generoModel->buscar_pelo_codigo($codigo);
+       
         $this->form_validation->set_rules('nome', 'nome', 'trim');
-        if ($this->form_validation->run()) {
-            $_POST['codigo'] = $codigo;
-            if ($this->generoModel->alterar($_POST)) {
-                $this->session->set_flashdata('msg', 'Alterado com sucesso!');
-                redirect('generoController/index');
+
+
+         $_POST['codigo'] = $codigo;
+        if (isset($_POST['nome'])) {
+            if ($_POST['nome'] == '0') {
+                $this->session->set_flashdata('msg', 'Campo "Nome" não pode ser preenchido com valor "0".');
+            } else {
+            if ($this->form_validation->run()) {
+                $_POST['codigo'] = $codigo;
+                if ($this->generoModel->alterar($_POST)) {
+                    $this->session->set_flashdata('msg', 'Alterado com sucesso!');
+                    redirect('generoController/index');
+                }
             }
         }
+        }
         $this->load->view('generoUpdateView', $dados);
-
     }
 
     function eliminar_genero() {

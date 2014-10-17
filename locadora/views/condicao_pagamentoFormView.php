@@ -18,9 +18,7 @@
         <h1><?php echo $titulo?></h1>
         <?php 
         
-        if($this->session->flashdata('msg')){
-            echo $this->session->flashdata('msg');
-        }
+        
             
         echo form_open('condicao_pagamentoController/inserir_condicao_pagamento');
         echo form_fieldset('Condições de Pagamento');
@@ -30,8 +28,12 @@
         echo form_input('nome','', 'size="50" class="campo" required');
         echo br();
         
-        echo form_label("Pracelas:");
+        echo form_label("Parcelas:");
         echo form_input('parcelas', '', 'size="50" class="campo" required');
+        echo br();
+        
+        echo form_label("Nº de Dias:");
+        echo form_input('dias', '', 'size="50" class="campo" required');
         echo br();
                         
         echo form_submit('submit', 'Enviar', 'class="botao1" required');
@@ -41,6 +43,11 @@
         echo form_fieldset_close();
         echo form_close();
         
+        echo '<div class="mensagem">';
+        if ($this->session->flashdata('msg')) {
+            echo $this->session->flashdata('msg');
+        }
+        echo '</div>';
         
         ?>
     </body>

@@ -6,7 +6,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	 */
 	function numRegPagina()
 	{
-		return 5;
+		return 50;
 	}
 
 	/**

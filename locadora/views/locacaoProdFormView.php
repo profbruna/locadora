@@ -42,16 +42,17 @@
             
 
             echo form_label("Produto:");
-            $listaProd = array();
-            $listaProd[0] = "Selecione um Produto";
-            foreach ($produtos as $p){
-                $lista[$p->codigo] = $p->nome;
-            }
-            echo form_dropdown('produto_codigo', $listaProd,'','class="form-control"');
+            //$listaProd = array();
+            //$listaProd[0] = "Selecione um Produto";
+            //foreach ($produtos as $p){
+               // $listaProd[$p->codigo] = $p->nome;
+            //}
+           // echo form_dropdown('produto_codigo', $listaProd,'','class="form-control"');
+            echo form_input('produto_codigo','', 'size="10" class="form-control"');
             echo br();
 
             echo form_label("Quantidade:");
-            echo form_input('quantidade', '', 'size="5" class="form-control"');
+            echo form_input('quantidade', '',  'size="5" class="form-control"');
             echo br();
 
             echo form_label("Data Devolução: ");

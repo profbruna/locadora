@@ -4,7 +4,11 @@ class locacaoProdModel extends CI_Model {
 
     function listarTudo($limit = 100, $_start = 0) {
         $this->db->limit($limit, $_start);
-        $query = $this->db->get('locacao_produto');
+        $this->db->select('locacao_produto.*, produto.nome as produto_nome');
+        $this->db->from('locacao_produto');
+        $this->db->join('produto', ' produto.codigo = locacao_produto.produto_codigo 
+            and locacao_produto.locacao_codigo = '.$this->uri->segment(3));
+        $query = $this->db->get();
         return $query->result();
     }
 
@@ -18,33 +22,30 @@ class locacaoProdModel extends CI_Model {
     }
 
     function alterar($dados = array()) {
-        if (isset($dados['locacao_codigo'])) {
-            $this->db->set('locacao_codigo', $dados['locacao_codigo']);
-        }
-        if (isset($dados['produto_codigo'])) {
-            $this->db->set('produto_codigo', $dados['produto_codigo']);
-        }
+
         if (isset($dados['quantidade'])) {
             $this->db->set('quantidade', $dados['quantidade']);
         }
         if (isset($dados['data_devolucao'])) {
             $this->db->set('data_devolucao', $dados['data_devolucao']);
         }
-        
 
-        $this->db->where('codigo', $this->uri->segment(3));
+        $this->db->where('locacao_codigo', $dados['locacao_codigo']);
+        $this->db->where('produto_codigo', $dados['produto_codigo']);
         $this->db->update('locacao_produto');
         return $this->db->affected_rows();
     }
 
-    function buscar_pelo_codigo($codigo) {
-        $this->db->where('codigo', $codigo);
+    function buscar_pelo_codigo($locacao_codigo,$produto_codigo) {
+        $this->db->where('locacao_codigo', $locacao_codigo);
+        $this->db->where('produto_codigo', $produto_codigo);
         $query = $this->db->get('locacao_produto');
         return $query->row(0);
     }
 
-    function excluir() {
-        $this->db->where('codigo', $this->uri->segment(3));
+    function excluir($locacao_codigo,$produto_codigo) {
+        $this->db->where('locacao_codigo', $locacao_codigo);
+        $this->db->where('produto_codigo', $produto_codigo);
         $this->db->delete('locacao_produto');
         return $this->db->affected_rows();
     }

@@ -29,7 +29,7 @@
             
             $codigo = 0;
             $codigo = @$loc->codigo;
-            echo form_open('locacaoProdController/alterar_produto/' . $codigo);
+            echo form_open('locacaoProdController/alterar_produto/' . $loc->locacao_codigo . "/" . $loc->produto_codigo);
             echo form_fieldset('Informações do Produto','class="col-sm-6 col-sm-offset-3 control-label"');
 
             
@@ -45,9 +45,9 @@
             echo form_input('quantidade', set_value('quantidade', @$loc->quantidade), 'size="5" class="form-control"');
             echo br();
 
-            $datadevolucao = implode('/', array_reverse(explode('-', $p->data_devolucao)));
+            $datadevolucao = implode('/', array_reverse(explode('-', @$loc->data_devolucao)));
             echo form_label("Data Devolução:");
-            echo form_input('data_devolucao', set_value('data_devolucao', $datadevolucao), 'size="10" class="form-control"');
+            echo form_input('data_devolucao', set_value('data_devolucao', $datadevolucao), 'size="10" class="form-control" id="datepicker"');
             echo br();
 
             

@@ -23,14 +23,13 @@
         $this->table->set_heading('Locação Código', 'Produto Código', 'Quantidade', 'Data Devolução', 'Ações');
         foreach(@$prodlocacoes as $p) {
 
-            $alterar = anchor("locacaoProdController/alterar_produto/$p->codigo", "Alterar" ,'class="btn btn-xs btn-primary"');
-            $excluir = anchor("locacaoProdController/excluir_produto/$p->codigo", "Excluir",'class="btn btn-xs btn-danger"');
-           
-
-
+            $alterar = anchor("locacaoProdController/alterar_produto/$p->locacao_codigo/$p->produto_codigo", "Alterar");
+            $excluir = anchor("locacaoProdController/excluir_produto/$p->locacao_codigo/$p->produto_codigo", "Excluir");
+        
+            
             $datadevolucao = implode('/', array_reverse(explode('-', $p->data_devolucao)));
 
-            $this->table->add_row($p->locao_codigo, $p->produto_codigo, $p->quantidade, $datadevolucao ,"$alterar $excluir");
+            $this->table->add_row($p->locacao_codigo, $p->produto_codigo . ' - ' . $p->produto_nome, $p->quantidade . ' Unidade(s)', $datadevolucao ,"$alterar $excluir");
         }
         $this->table->set_template($tmpl);
         echo $this->table->generate();

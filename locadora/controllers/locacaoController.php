@@ -21,10 +21,9 @@ class locacaoController extends CI_Controller {
     function novo() {
         $dados['titulo'] = "Cadastro de Locações";
         $this->load->model('clienteModel');
-        $this->load->model('condicao_pagamentoModel');
         $dados['clientes'] = $this->clienteModel->listarTudo();
         $dados['condicoes'] = $this->condicao_pagamentoModel->listarTudo();
-
+      
         $this->load->view('locacaoFormView', $dados);
     }
 
@@ -36,13 +35,9 @@ class locacaoController extends CI_Controller {
             'observacoes' => $this->input->post('observacoes'),
             'cliente_codigo' => $this->input->post('cliente_codigo'),
             'condicao_pagamento_codigo' => $this->input->post('condicao_pagamento_codigo'),
+            
         );
-
-        $data = substr($dados['data'], 0, 10);
-        $hora = substr($dados['data'], 11, 8);
-        $data = implode('-', array_reverse(explode('/', $data)));
-        $dados['data'] = $data . ' ' . $hora;
-
+        $dados['data'] = implode('-', array_reverse(explode('/', $dados['data'])));
 
         $this->form_validation->set_rules(
                 'data', 'data', 'trim|required');
@@ -54,17 +49,17 @@ class locacaoController extends CI_Controller {
                 'cliente_codigo', 'cliente_codigo', 'trim|required');
         $this->form_validation->set_rules(
                 'condicao_pagamento_codigo', 'condicao_pagamento_codigo', 'trim|required');
-
-
+        
+                
 
         if ($this->form_validation->run()) {
             if ($this->locacaoModel->inserir($dados)) {
                 $this->session->set_flashdata('msg', 'Criado com Sucesso');
                 redirect('locacaoController');
             }
-        } else {
+                    } else {
             $this->session->set_flashdata('msg', $this->form_validation->error_string());
-            redirect('locacaoController');
+             redirect('locacaoController');
         }
     }
 
@@ -72,12 +67,10 @@ class locacaoController extends CI_Controller {
         $this->load->model('locacaoModel');
         $dados['titulo'] = "Alteração de Locação";
         $this->load->model('clienteModel');
-        $this->load->model('condicao_pagamentoModel');
         $dados['clientes'] = $this->clienteModel->listarTudo();
         $dados['loc'] = $this->locacaoModel->buscar_pelo_codigo($codigo);
-        $dados['condicoes'] = $this->condicao_pagamentoModel->listarTudo();
 
-
+       
         $this->form_validation->set_rules('data', 'data', 'trim|required');
         $this->form_validation->set_rules('valor', 'valor', 'trim|required');
         $this->form_validation->set_rules('observacoes', 'observacoes', 'trim|required');
@@ -85,13 +78,7 @@ class locacaoController extends CI_Controller {
         $this->form_validation->set_rules('condicao_pagamento_codigo', 'condicao_pagamento_codigo', 'trim|required');
 
         if ($this->form_validation->run()) {
-            //$_POST['data'] = implode('-', array_reverse(explode('/', $_POST['data'])));
-
-            $data = substr($_POST['data'], 0, 10);
-            $hora = substr($_POST['data'], 11, 8);
-            $data = implode('-', array_reverse(explode('/', $data)));
-            $_POST['data'] = $data . ' ' . $hora;
-
+            $_POST['data'] = implode('-', array_reverse(explode('/', $_POST['data'])));
 
             $_POST['codigo'] = $codigo;
             if ($this->locacaoModel->alterar($_POST)) {
@@ -107,12 +94,13 @@ class locacaoController extends CI_Controller {
 
     function excluir_locacao($codigo) {
         $this->load->model('locacaoModel');
-
-
-        if ($this->locacaoModel->excluir()) {
-            $this->session->set_flashdata('msg', 'Excluído com Sucesso');
-            redirect('locacaoController');
-        } else {
+        
+        
+            if ($this->locacaoModel->excluir()) {
+                $this->session->set_flashdata('msg', 'Excluído com Sucesso');
+                redirect('locacaoController');
+            }
+         else {
             $this->session->set_flashdata('msg', 'Não foi possível excluir.');
             redirect('locacaoController');
         }

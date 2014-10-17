@@ -25,6 +25,9 @@ class condicao_pagamentoModel extends CI_Model {
             if (isset($dados['parcelas'])) {
                 $this->db->set('parcelas', $dados['parcelas']);
             }
+            if (isset($dados['dias'])) {
+                $this->db->set('dias', $dados['dias']);
+            }
             $this->db->where('codigo', $this->uri->segment(3));
             $this->db->update('condicao_pagamento');
             return $this->db->affected_rows();

@@ -21,7 +21,10 @@
         <!-- HEADER --> 
         <header class="container-fluid"> 
             <div class="row-fluid"> 
-                <div class="span12"> 
+                <div class="span12">
+                    <div id="menu_topo">
+                        <?php require_once 'locadora/views/menuView.php'; ?>
+                    </div>
                     <div class="navbar"> 
                         <div class="navbar-inner"> 
                             <div class="container"> 
@@ -51,29 +54,20 @@
                             $link_alterar = anchor("clienteController/alterar_cliente/$p->codigo", 'Editar', 'title="Editar"');
                             $link_eliminar = anchor("clienteController/eliminar_cliente/$p->codigo", 'Excluir', 'title="Excluir"');
                             $link_listar = anchor("cidadeController/index/$p->codigo", 'Cidades', 'title="Listar Cidades"');
-                          
-                            $this->table->add_row($p->nome, $p->endereco, $p->cpf, $p->rg, $p->telefone, $p->email, $p->cidade_codigo.' - '.$p->cidade_nome,"$link_alterar $link_eliminar $link_listar ");
+
+                            $this->table->add_row($p->nome, $p->endereco, $p->cpf, $p->rg, $p->telefone, $p->email, $p->cidade_codigo . ' - ' . $p->cidade_nome, "$link_alterar $link_eliminar $link_listar ");
                         }
                         ?>
 
-                        <div id="menu">
-                            <ul class="nav nav-tabs nav-stacked"> 
-                                <li><?php echo anchor("clienteController/novo", 'Inserir Clientes', 'title="Inserir Clientes"', 'class="novo"'); ?></li>                       
-                            </ul>
-                            <ul class="nav nav-tabs nav-stacked"> 
-                                <li style="margin-left: 130px; margin-top: -10px;"><?php echo anchor("estadoController/novo", 'Inserir Estados', 'title="Inserir Estados"', 'class="novo"'); ?></li>                       
-                            </ul>
-                            <ul class="nav nav-tabs nav-stacked"> 
-                                <li style="margin-left: 260px; margin-top: -30px;"><?php echo anchor("cidadeController/novo", 'Inserir Cidades', 'title="Inserir Cidades"', 'class="novo"'); ?></li>                       
-                            </ul>
-                        </div>
+
+
                         <h3 class="center"> Lista de Clientes </h3> 
                         <hr />
-                        
+
                         <?php
                         echo $this->table->generate();
                         ?>
-                        
+
                         <hr/>
                         <div class="pagination pagination-centered">
                             <?php

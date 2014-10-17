@@ -20,7 +20,7 @@
                     dateFormat: 'dd/mm/yy',
                     nextText: 'Próximo',
                     prevText: 'Anterior',
-                    timeFormat: 'HH:mm:ss',
+                    timeFormat: 'H:m:s',
                     stepHour: 2,
                     stepMinute: 10,
                     stepSecond: 10
@@ -37,6 +37,7 @@
             echo form_fieldset('Informações da Locação', 'class="col-sm-6 col-sm-offset-3 control-label"');
 
             //$data = implode('/', array_reverse(explode('-', @$loc->data)));
+            date_default_timezone_set('America/Sao_Paulo');
             $data  = substr($loc->data, 0, 10);
             $hora = substr($loc->data, 11, 8);
             $data = implode('/', array_reverse(explode('-', $data)));
@@ -67,7 +68,11 @@
 
 
             echo form_label("Condição de Pagamento:");
-            echo form_input('condicao_pagamento_codigo', set_value('condicao_pagamento_codigo', @$loc->condicao_pagamento_codigo), 'size="50" class="form-control"');
+            $listaCond = array('Selecione uma Condição de Pagamento');
+            foreach ($condicoes as $c) {
+                $listaCond[$c->codigo] = $c->nome;
+            }
+            echo form_dropdown('condicao_pagamento_codigo', $listaCond, (@$loc->condicao_pagamento_codigo), ' class="form-control"');
             echo br();
 
             echo form_submit('submit', 'Enviar', 'class="btn btn-success"');

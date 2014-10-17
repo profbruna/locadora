@@ -23,16 +23,17 @@
         $this->table->set_heading('Data', 'Valor', 'Observações', 'Cliente', 'Condição de Pagamento',  'Ações');
         foreach(@$locacoes as $l) {
 
-            $alterar = anchor("locacaoController/alterar_locacao/$l->codigo", "Alterar" ,'class="btn btn-xs btn-primary"');
-            $excluir = anchor("locacaoController/excluir_locacao/$l->codigo", "Excluir",'class="btn btn-xs btn-danger"');
-            $inserirProd = anchor("locacaoProdController/novo/$l->codigo", "Inserir Produto",'class="btn btn-xs btn-danger"');
-            $listarProd = anchor("locacaoProdController/index/$l->codigo", "Listar Produtos",'class="btn btn-xs btn-danger"');
-            $financeiro = anchor("financeiroController/index/$l->codigo", "Financeiro",'class="btn btn-xs btn-danger"');
+            $alterar = anchor("locacaoController/alterar_locacao/$l->codigo", "Alterar" );
+            $excluir = anchor("locacaoController/excluir_locacao/$l->codigo", "Excluir");
+            $inserirProd = anchor("locacaoProdController/novo/$l->codigo", "Inserir Produto");
+            $listarProd = anchor("locacaoProdController/index/$l->codigo", "Listar Produtos");
+            //$listarProd = anchor("locacaoProdController/index/".$this->uri->segment(3), "Listar Produtos");
+            $financeiro = anchor("financeiroController/index/$l->codigo", "Financeiro");
             
-           
+            date_default_timezone_set('America/Sao_Paulo');
             $data  = substr($l->data, 0, 10);
             $hora = substr($l->data, 11, 8);
-            $data = implode('/', array_reverse(explode('-', $data)));
+            $data = implode('/', array_reverse(explode('-', $data)));         
 
             $this->table->add_row($data . ' ' . $hora, $l->valor, $l->observacoes, $l->cliente_codigo. ' - ' .$l->cliente_nome, $l->condicao_pagamento_codigo. ' - ' . $l->condicao_pagamento_nome,  "$alterar $excluir $inserirProd $listarProd $financeiro" );
         }

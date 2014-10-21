@@ -2,10 +2,7 @@
     <head>
         <meta charset="utf-8">
         <title> <?php echo $titulo; ?></title>
-          <link rel="stylesheet" href=" <?php echo base_url('/includes/bot/css/bootstrap.css'); ?>"/>
-        <link rel="stylesheet" href=" <?php echo base_url('/includes/bot/css/bootstrap-theme.css'); ?>"/>
-
-        
+        <link type="text/css" rel="stylesheet" href="http://127.0.0.1/locadora/locadora/views/css/estilo.css"/>
     </head>
 
     <body>
@@ -15,10 +12,10 @@
             echo $this->session->flashdata('msg');
         }
 
-        echo anchor("locacaoProdController/novo/".$this->uri->segment(3), "Inserir",'class="btn btn-xs btn-primary"');
+        echo anchor("locacaoProdController/novo/".$this->uri->segment(3), "Inserir",'class=""');
 
 
-        $tmpl = array('table_open' => '<table class="table table-striped">');
+        $tmpl = array('table_open' => '<table class="">');
 
         $this->table->set_heading('Locação Código', 'Produto Código', 'Quantidade', 'Data Devolução', 'Ações');
         foreach(@$prodlocacoes as $p) {

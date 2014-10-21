@@ -43,7 +43,7 @@ class clienteController extends CI_Controller {
 
         if ($this->clienteModel->inserir($inf)) {
             $this->session->set_flashdata('msg', 'Criado com sucesso!');
-            redirect('clienteController/index');
+            redirect('../index.php');
         } else {
             $this->session->set_flashdata('msg', 'Não consegui gravar!');
         }

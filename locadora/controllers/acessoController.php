@@ -11,28 +11,22 @@ class acessoController extends CI_Controller {
         $this->load->model('acessoModel');
         $usu = $this->acessoModel->valida_usuario($_POST);
 
-        if (!$usu) {
-            echo 'login inválido';
-            redirect('acessoController');
-        } else {
-            if ($usu->login != "") {
-                if ($usu->senha == $_POST ['senha']) {
-                    if ($usu->inativo == 'S') {
-                        echo 'Usuario Inativo';
-                    } else {
-                        $this->session->set_flashdata('usuario_nome', $usu->nome);
-                        $this->session->set_flashdata('usuario_codigo', $usu->codigo);
-                        $this->inserir_acesso('N', $usu);
-                        echo 'conectou';
-                        redirect('clienteController');
-                    }
+        if ($usu->nome != "") {
+            if ($usu->senha == $_POST ['senha']) {
+                if ($usu->inativo == 'S') {
+                    echo 'Usuario Inativo';
                 } else {
-//                echo 'Login ou senha incorretos';
-                    $this->erro_acesso($usu);
+                    $this->session->set_flashdata('usuario_nome', $usu->nome);
+                    $this->session->set_flashdata('usuario_codigo', $usu->codigo);
+                    $this->inserir_acesso('N', $usu);
+                    echo 'conectou';
+                    redirect('usuarioController'); 
                 }
             } else {
                 $this->erro_acesso($usu);
             }
+        } else {
+            $this->erro_acesso($usu);
         }
     }
 

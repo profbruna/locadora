@@ -2,12 +2,11 @@
 
 class locacaoProdModel extends CI_Model {
 
-    function listarTudo($limit = 100, $_start = 0) {
+    function listarTudo($limit = 100, $_start = 0, $locacao) {
         $this->db->limit($limit, $_start);
         $this->db->select('locacao_produto.*, produto.nome as produto_nome');
         $this->db->from('locacao_produto');
-        $this->db->join('produto', ' produto.codigo = locacao_produto.produto_codigo 
-            and locacao_produto.locacao_codigo = '.$this->uri->segment(3));
+        $this->db->join('produto', ' produto.codigo = locacao_produto.produto_codigo and locacao_produto.locacao_codigo = '.$locacao);
         $query = $this->db->get();
         return $query->result();
     }

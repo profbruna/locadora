@@ -12,7 +12,7 @@ class locacaoProdController extends CI_Controller {
 
         $pagina = ($this->uri->segment(4) ? $this->uri->segment(4) : 0);
 
-        $dados['prodlocacoes'] = $this->locacaoProdModel->listarTudo(numRegPagina(), $pagina);
+        $dados['prodlocacoes'] = $this->locacaoProdModel->listarTudo(numRegPagina(), $pagina, $this->uri->segment(3));
         $dados['paginacao'] = criaPaginacao('locacaoProdController', $this->locacaoProdModel->contarTudo(), $this->uri->segment(3), 4);
 
         $this->load->view('locacaoProdView', $dados);

@@ -2,8 +2,7 @@
     <head>
         <meta charset="utf-8"/>
         <title><?php echo $titulo; ?></title>
-        <link rel="stylesheet" href=" <?php echo base_url('/includes/bot/css/bootstrap.css'); ?>"/>
-        <link rel="stylesheet" href=" <?php echo base_url('/includes/bot/css/bootstrap-theme.css'); ?>"/>
+        
         <link href="http://127.0.0.1/locadora/includes/jquery/css/ui-lightness/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="http://127.0.0.1/locadora/includes/jquery/js/jquery-1.9.1.js"></script>
         <script type="text/javascript" src="http://127.0.0.1/locadora/includes/jquery/js/jquery-ui.js"></script>
@@ -34,7 +33,7 @@
             $codigo = 0;
             $codigo = @$loc->codigo;
             echo form_open('locacaoController/alterar_locacao/' . $codigo);
-            echo form_fieldset('Informações da Locação', 'class="col-sm-6 col-sm-offset-3 control-label"');
+            echo form_fieldset('Informações da Locação', 'class=""');
 
             //$data = implode('/', array_reverse(explode('-', @$loc->data)));
             date_default_timezone_set('America/Sao_Paulo');
@@ -42,15 +41,15 @@
             $hora = substr($loc->data, 11, 8);
             $data = implode('/', array_reverse(explode('-', $data)));
             echo form_label("Data:");
-            echo form_input('data', set_value('data', $data . ' ' . $hora), 'size="10" id="datepicker" class="form-control"');
+            echo form_input('data', set_value('data', $data . ' ' . $hora), 'size="10" id="datepicker" class=""');
             echo br();
 
             echo form_label("Valor:");
-            echo form_input('valor', set_value('valor', @$loc->valor), 'size="5" class="form-control"');
+            echo form_input('valor', set_value('valor', @$loc->valor), 'size="5" class=""');
             echo br();
 
             echo form_label("Observações:");
-            echo form_input('observacoes', set_value('observacoes', @$loc->observacoes), 'size="5" class="form-control"');
+            echo form_input('observacoes', set_value('observacoes', @$loc->observacoes), 'size="5" class=""');
             echo br();
 
             $lista = array('Selecione um Cliente');
@@ -58,7 +57,7 @@
                 $lista[$c->codigo] = $c->nome;
             }
             echo form_label("Cliente Código:");
-            echo form_dropdown('cliente_codigo', $lista, (@$loc->cliente_codigo), 'class="form-control"');
+            echo form_dropdown('cliente_codigo', $lista, (@$loc->cliente_codigo), 'class=""');
             echo br();
 
             /* $listagem = array('' => 'Selecione um estado');
@@ -72,11 +71,11 @@
             foreach ($condicoes as $c) {
                 $listaCond[$c->codigo] = $c->nome;
             }
-            echo form_dropdown('condicao_pagamento_codigo', $listaCond, (@$loc->condicao_pagamento_codigo), ' class="form-control"');
+            echo form_dropdown('condicao_pagamento_codigo', $listaCond, (@$loc->condicao_pagamento_codigo), ' class=""');
             echo br();
 
-            echo form_submit('submit', 'Enviar', 'class="btn btn-success"');
-            echo anchor("locacaoController/", "Cancelar", 'class="btn btn-danger"');
+            echo form_submit('submit', 'Enviar', 'class=""');
+            echo anchor("locacaoController/", "Cancelar", 'class=""');
 
             echo form_fieldset_close();
             echo form_close();

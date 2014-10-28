@@ -49,7 +49,7 @@ class acessoController extends CI_Controller {
         $this->session->set_flashdata('msg', 'Usuario ou senha inválidos');
         if ($this->acessoModel->buscar_erros($usu->codigo) >= 3) {
             $this->acessoModel->bloquear($usu->codigo);
-            echo 'Acesso bloqueado dirija-se a sua agência bancária!';
+            echo 'Você errou mais de três vezes. Usuário Inativo!';
         }
         $this->load->view('acessoView');
     }

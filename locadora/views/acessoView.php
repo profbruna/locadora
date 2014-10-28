@@ -41,7 +41,7 @@
                             echo $this->session->flashdata('msg');
                         }
                         echo form_open('acessoController/faca_login'); //isenrir_pessoa
-                        echo form_fieldset('Faça o seu Login');
+                        echo form_fieldset('Faça o seu Login');//conta
                         echo form_label("Login: ");
                         echo form_input('login', '', 'size="50" class="campo" required');
                         echo br();

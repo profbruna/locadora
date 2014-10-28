@@ -41,7 +41,7 @@
                     <div class="navbar"> 
                         <div class="navbar-inner"> 
                             <div class="container"> 
-                                <h2 class="center"><?php echo $titulo; ?></h2> 
+                                <h2 class="center" style="margin-top: -100px;"><?php echo $titulo; ?></h2> 
                             </div> 
                         </div> 
                     </div> 
@@ -55,9 +55,6 @@
                 <!-- COLUNA OCUPANDO 2 ESPAÇOS NO GRID -->         
                 <div class="span12">
                     <div class="well">
-
-
-
                         <?php
                         if ($this->session->flashdata('msg')) {
                             echo $this->session->flashdata('msg');

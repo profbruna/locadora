@@ -1,14 +1,33 @@
 .center{
     text-align: center;
 }
+.center1{
+    text-align: center;
+    margin-top: -900px;
+    font-size: 5em;
+}
+
 #menu_topo{
     width: 100%;
     margin-left: 10%;
-    margin-bottom: -60px;
+    padding-top: 20px;
+    margin-bottom: -100px;
     /*border: 0.1em solid red;*/
 }
+#menu_topo1{
+    width: 100%;
+    margin-left: 10%;
+    margin-top: 30px;
+    height: 40px;
+    margin-bottom: -100px;
+    /*border: 0.1em solid red;*/
+}
+.principal{
+    margin-top: 100%;
+    margin-bottom: 250px;
+}
 .container{
-    
+    margin-top: 150px;
 }
 #menu ul li{
     /*width: 50px;*/

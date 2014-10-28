@@ -40,7 +40,7 @@
                     <div class="navbar"> 
                         <div class="navbar-inner"> 
                             <div class="container"> 
-                                <h2 class="center"><?php echo $titulo; ?></h2> 
+                                <h2 class="center" style="margin-top: -100px;"><?php echo $titulo; ?></h2> 
                             </div> 
                         </div> 
                     </div> 

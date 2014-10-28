@@ -30,14 +30,21 @@ class tipoController extends CI_Controller {
         $inf = array(
             'nome' => $this->input->post('nome'),
         );
+
+        $cont = strlen($inf['nome']);
+
         if ($inf['nome'] == '0') {
             $this->session->set_flashdata('msg', 'Campo "Nome" não pode ser preenchido com valor "0".');
         } else {
-            if ($this->tipoModel->inserir($inf)) {
-                $this->session->set_flashdata('msg', 'Criado com sucesso!');
-                redirect('tipoController/index');
+            if ($cont < 5) {
+                $this->session->set_flashdata('msg', 'Campo "Nome" deve ser preenchido com 5 caracteres no mínimo.');
             } else {
-                $this->session->set_flashdata('msg', 'Não consegui gravar!');
+                if ($this->tipoModel->inserir($inf)) {
+                    $this->session->set_flashdata('msg', 'Criado com sucesso!');
+                    redirect('tipoController/index');
+                } else {
+                    $this->session->set_flashdata('msg', 'Não consegui gravar!');
+                }
             }
         }redirect('tipoController/index' . $this->uri->segment(3));
     }
@@ -50,14 +57,23 @@ class tipoController extends CI_Controller {
         $dados['tipo'] = $this->tipoModel->buscar_pelo_codigo($codigo);
 
         $this->form_validation->set_rules('nome', 'nome', 'trim');
+
+        
         if ($this->form_validation->run()) {
             $_POST['codigo'] = $codigo;
+            
+            $cont = strlen($_POST['nome']);
+            
             if ($_POST['nome'] == '0') {
                 $this->session->set_flashdata('msg', 'Campo "Nome" não pode ser preenchido com valor "0".');
             } else {
-                if ($this->tipoModel->alterar($_POST)) {
-                    $this->session->set_flashdata('msg', 'Alterado com sucesso!');
-                    redirect('tipoController/index');
+                if ($cont < 5) {
+                    $this->session->set_flashdata('msg', 'Campo "Nome" deve ser preenchido com 5 caracteres no mínimo.');
+                } else {
+                    if ($this->tipoModel->alterar($_POST)) {
+                        $this->session->set_flashdata('msg', 'Alterado com sucesso!');
+                        redirect('tipoController/index');
+                    }
                 }
             }
         }

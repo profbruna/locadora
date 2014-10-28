@@ -41,7 +41,7 @@
                     <div class="navbar"> 
                         <div class="navbar-inner"> 
                             <div class="container"> 
-                                <h2 class="center" style="margin-top: -100px;"><?php echo $titulo; ?></h2> 
+                                <h2 class="center"><?php echo $titulo; ?></h2> 
                             </div> 
                         </div> 
                     </div> 
@@ -55,13 +55,16 @@
                 <!-- COLUNA OCUPANDO 2 ESPAÇOS NO GRID -->         
                 <div class="span12">
                     <div class="well">
+
+
+
                         <?php
                         if ($this->session->flashdata('msg')) {
                             echo $this->session->flashdata('msg');
                         }
 
-                        echo form_open('clienteController/inserir_cliente');
-                        echo form_fieldset('Informações Pessoais');
+                        echo form_open('produtoController/inserir_cliente');
+                        echo form_fieldset('Informações dos Produtos');
                         ?>
                         <form class="form-horizontal">
                             <div class="control-group">
@@ -70,32 +73,64 @@
                                 echo form_input('nome', '', 'size="50" class="campo" required');
                                 echo br();
 
-                                echo form_label("Endereço: ");
-                                echo form_input('endereco', '', 'size="5" class="campo"');
+                                echo form_label("Quantidade: ");
+                                echo form_input('quantidade', '', 'size="5" class="campo"');
                                 echo br();
 
-                                echo form_label("Cpf: ");
-                                echo form_input('cpf', '', 'size="5" class="campo" required');
+                                echo form_label("Quantidade Locado: ");
+                                echo form_input('quantidade_locado', '', 'size="5" class="campo" required');
                                 echo br();
 
-                                echo form_label("Rg: ");
-                                echo form_input('rg', '', 'size="10" class="campo" required');
+                                echo form_label("Quantidade Disponivel: ");
+                                echo form_input('quantidade_disponivel', '', 'size="10" class="campo" required');
                                 echo br();
 
-                                echo form_label("Telefone: ");
-                                echo form_input('telefone', '', 'size="10" class="campo"');
+                                echo form_label("Valor: ");
+                                echo form_input('valor', '', 'size="10" class="campo"');
                                 echo br();
 
-                                echo form_label("Email: ");
-                                echo form_input('email', '', 'size="50" class="campo" required');
+                                echo form_label("Inativo: ");
+                                echo form_input('inativo', '', 'size="50" class="campo" required');
+                                echo br();
+                                
+                                echo form_label("Data Cadastro: ");
+                                echo form_input('data_cadastro', '', 'size="50" class="campo" required');
+                                echo br();
+                                
+                                echo form_label("Numero Serie: ");
+                                echo form_input('numero_serie', '', 'size="50" class="campo" required');
+                                echo br();
+                                
+                                echo form_label("Detalhes: ");
+                                echo form_input('detalhes', '', 'size="50" class="campo" required');
                                 echo br();
 
-                                echo form_label("Cidade: ");
-                                $listagem = array('' => 'Selecione uma Cidade');
-                                foreach ($cidades as $e) {
+                                echo form_label("Genero Codigo: ");
+                                $listagem = array('' => 'Selecione o Genero');
+                                foreach ($genero_codigo as $e) {
                                     $listagem[$e->codigo] = "$e->codigo - $e->nome";
                                 }
-                                echo form_dropdown('cidade_codigo', $listagem, set_value('cidade_codigo', @$cidadeAtual), 'required');
+                                echo form_dropdown('genero_codigo', $listagem, set_value('genero_codigo', @$generoAtual), 'required');
+                                echo br();
+                                
+                                echo form_label("Classificação Codigo: ");
+                                $listagem = array('' => 'Selecione a Classificaçâo');
+                                foreach ($classificacao_codigo as $e) {
+                                    $listagem[$e->codigo] = "$e->codigo - $e->nome";
+                                }
+                                echo form_dropdown('classificacao_codigo', $listagem, set_value('classificacao_codigo', @$classificacaoAtual), 'required');
+                                echo br();
+                                
+                                echo form_label("Tipo Codigo: ");
+                                $listagem = array('' => 'Selecione o Tipo');
+                                foreach ($tipo_codigo as $e) {
+                                    $listagem[$e->codigo] = "$e->codigo - $e->nome";
+                                }
+                                echo form_dropdown('tipo_codigo', $listagem, set_value('tipo_codigo', @$tipoAtual), 'required');
+                                echo br();
+                                
+                                echo form_label("Dias Devolução: ");
+                                echo form_input('dias_devolucao', '', 'size="50" class="campo" required');
                                 echo br();
 
                                 echo form_submit('submit', 'Enviar', 'class="botao1"');

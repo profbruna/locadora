@@ -1,9 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
     <head>
-
-        <!--<link type="text/css" rel="stylesheet" href="http://127.0.0.1/codeigniter/application/views/css/estilo.css"/>-->
-
         <meta charset="UTF-8"> 
         <title><?php echo $titulo; ?></title> 
         <!-- JQUERY --> 
@@ -25,11 +22,14 @@
                     <div id="menu_topo">
                         <?php require_once 'locadora/views/menuView.php'; ?>
                     </div>
+                    <div id="menu_topo1">
+                       <?php require_once 'locadora/views/listaView.php'; ?>
+                    </div>
                     <div class="navbar"> 
                         <div class="navbar-inner"> 
                             <div class="container"> 
-                                <h2 class="center">Lista de Clientes</h2> 
-                            </div> 
+                                
+                            </div>
                         </div> 
                     </div> 
                 </div> 
@@ -58,10 +58,12 @@
                             $this->table->add_row($p->nome, $p->endereco, $p->cpf, $p->rg, $p->telefone, $p->email, $p->cidade_codigo . ' - ' . $p->cidade_nome, "$link_alterar $link_eliminar $link_listar ");
                         }
                         ?>
-
-
-
-                        <!--<h3 class="center"> Lista de Clientes </h3>--> 
+                        <div id="menu">
+                            <ul class="nav nav-tabs nav-stacked"> 
+                                <li><?php echo anchor("clienteController/novo", 'Inserir', 'title="Inserir Estado"'); ?></li>                       
+                            </ul>
+                        </div>
+                        <h3 class="center"> <?php echo $titulo; ?> </h3> 
                         <hr />
 
                         <?php

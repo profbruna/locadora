@@ -10,10 +10,10 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
         <script>window.jQuery || document.write('<script src="js/jquery-1.7.1.min.js"><\/script>')</script> 
         <!-- TWITTER BOOTSTRAP CSS --> 
-        <link href="http://127.0.0.1/codeigniter/application/views/css/bootstrap.css" rel="stylesheet" type="text/css"/>  
-        <link href="http://127.0.0.1/codeigniter/application/views/css/estilo.css" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo base_url('locadora/views/css/bootstrap.css') ?>" rel="stylesheet" type="text/css"/>  
+        <link href="<?php echo base_url('locadora/views/css/estilo.css') ?>" rel="stylesheet" type="text/css"/>
         <!-- TWITTER BOOTSTRAP JS --> 
-        <script src="http://127.0.0.1/codeigniter/application/views/jquery/js/bootstrap.min.js"></script> 
+        <script src="<?php echo base_url('locadora/views/jquery/js/bootstrap.min.js') ?>"></script> 
 
 
     </head>
@@ -21,11 +21,17 @@
         <!-- HEADER --> 
         <header class="container-fluid"> 
             <div class="row-fluid"> 
-                <div class="span12"> 
+                <div class="span12">
+                    <div id="menu_topo">
+                        <?php require_once 'locadora/views/menuView.php'; ?>
+                    </div>
+                    <div id="menu_topo1">
+                       <?php require_once 'locadora/views/listaView.php'; ?>
+                    </div>
                     <div class="navbar"> 
                         <div class="navbar-inner"> 
                             <div class="container"> 
-                                <h2 class="center">Cadastro de Cidades</h2> 
+                                 
                             </div> 
                         </div> 
                     </div> 
@@ -36,19 +42,19 @@
         <div class="container-fluid"> 
             <!-- CLASSE PARA DEFINIR UMA LINHA --> 
             <div class="row-fluid"> 
-                <!-- COLUNA OCUPANDO 2 ESPAÇOS NO GRID -->         
+                <!-- COLUNA OCUPANDO 2 ESPAÃ‡OS NO GRID -->         
                 <div class="span12">
                     <div class="well">
                         <?php if ($this->session->flashdata('msg')) { ?>
                             <div class="alert ajuste">
-                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <button type="button" class="close" data-dismiss="alert">Ã—</button>
                                 <?php echo $this->session->flashdata('msg'); ?>
                             </div>
                             <?php
                         }
 
                         
-                        $this->table->set_heading('Código', 'Nome', 'Ações');
+                        $this->table->set_heading('CÃ³digo', 'Nome', 'AÃ§Ãµes');
                         foreach ($cidades as $c) {
                             $link_alterar = anchor("cidadeController/alterar_cidade/$c->codigo", 'Editar', 'title="Editar"');
                             $link_eliminar = anchor("cidadeController/eliminar_cidade/$c->codigo", 'Excluir', 'title="Excluir"');                   

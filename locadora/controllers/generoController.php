@@ -31,17 +31,24 @@ class generoController extends CI_Controller {
             'codigo' => $this->input->post('codigo'),
             'nome' => $this->input->post('nome'),
         );
+
+        $cont = strlen($inf['nome']);
+
         if ($inf['nome'] == '0') {
             $this->session->set_flashdata('msg', 'Campo "Nome" não pode ser preenchido com valor "0".');
         } else {
-            if ($this->generoModel->inserir($inf)) {
-                $this->session->set_flashdata('msg', 'Criado com sucesso!');
-                redirect('generoController/index');
+            if ($cont < 5) {
+                $this->session->set_flashdata('msg', 'Campo "Nome" deve ser preenchido com 5 caracteres no mínimo.');
             } else {
-                $this->session->set_flashdata('msg', 'Não consegui gravar!');
+                if ($this->generoModel->inserir($inf)) {
+                    $this->session->set_flashdata('msg', 'Criado com sucesso!');
+                    redirect('generoController/index');
+                } else {
+                    $this->session->set_flashdata('msg', 'Não consegui gravar!');
+                }
             }
         }redirect('generoController/index' . $this->uri->segment(3));
-}
+    }
 
     function alterar_genero($codigo) {
         $this->load->model('generoModel');
@@ -49,23 +56,30 @@ class generoController extends CI_Controller {
         $this->load->model('generoModel');
 
         $dados['genero'] = $this->generoModel->buscar_pelo_codigo($codigo);
-       
+
         $this->form_validation->set_rules('nome', 'nome', 'trim');
 
+        
 
-         $_POST['codigo'] = $codigo;
+        $_POST['codigo'] = $codigo;
         if (isset($_POST['nome'])) {
+            
+            $cont = strlen($_POST['nome']);
             if ($_POST['nome'] == '0') {
                 $this->session->set_flashdata('msg', 'Campo "Nome" não pode ser preenchido com valor "0".');
             } else {
-            if ($this->form_validation->run()) {
-                $_POST['codigo'] = $codigo;
-                if ($this->generoModel->alterar($_POST)) {
-                    $this->session->set_flashdata('msg', 'Alterado com sucesso!');
-                    redirect('generoController/index');
+                if ($this->form_validation->run()) {
+                    $_POST['codigo'] = $codigo;
+                    if ($cont < 5) {
+                        $this->session->set_flashdata('msg', 'Campo "Nome" deve ser preenchido com 5 caracteres no mínimo.');
+                    } else {
+                        if ($this->generoModel->alterar($_POST)) {
+                            $this->session->set_flashdata('msg', 'Alterado com sucesso!');
+                            redirect('generoController/index');
+                        }
+                    }
                 }
             }
-        }
         }
         $this->load->view('generoUpdateView', $dados);
     }

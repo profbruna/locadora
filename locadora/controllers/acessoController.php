@@ -11,22 +11,27 @@ class acessoController extends CI_Controller {
         $this->load->model('acessoModel');
         $usu = $this->acessoModel->valida_usuario($_POST);
 
-        if ($usu->nome != "") {
-            if ($usu->senha == $_POST ['senha']) {
-                if ($usu->inativo == 'S') {
-                    echo 'Usuario Inativo';
+        if (!$usu) {
+            echo 'login inválido';
+            redirect('acessoController');
+        } else {
+            if ($usu->login != "") {
+                if ($usu->senha == $_POST ['senha']) {
+                    if ($usu->inativo == 'S') {
+                        echo 'Usuario Inativo';
+                    } else {
+                        $this->session->set_flashdata('usuario_nome', $usu->nome);
+                        $this->session->set_flashdata('usuario_codigo', $usu->codigo);
+                        $this->inserir_acesso('N', $usu);
+                        $this->load->view('homeView');
+                    }
                 } else {
-                    $this->session->set_flashdata('usuario_nome', $usu->nome);
-                    $this->session->set_flashdata('usuario_codigo', $usu->codigo);
-                    $this->inserir_acesso('N', $usu);
-                    echo 'conectou';
-                    redirect('homeView'); 
+//                echo 'Login ou senha incorretos';
+                    $this->erro_acesso($usu);
                 }
             } else {
                 $this->erro_acesso($usu);
             }
-        } else {
-            $this->erro_acesso($usu);
         }
     }
 
@@ -49,7 +54,7 @@ class acessoController extends CI_Controller {
         $this->session->set_flashdata('msg', 'Usuario ou senha inválidos');
         if ($this->acessoModel->buscar_erros($usu->codigo) >= 3) {
             $this->acessoModel->bloquear($usu->codigo);
-            echo 'Acesso bloqueado dirija-se a sua agência bancária!';
+            echo 'Você errou mais de três vezes. Usuário Inativo!';
         }
         $this->load->view('acessoView');
     }

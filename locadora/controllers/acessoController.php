@@ -18,7 +18,7 @@ class acessoController extends CI_Controller {
             if ($usu->login != "") {
                 if ($usu->senha == $_POST ['senha']) {
                     if ($usu->inativo == 'S') {
-                        echo 'Usuario Inativo';
+                        echo 'Usuário Inativo';
                     } else {
                         $this->session->set_flashdata('usuario_nome', $usu->nome);
                         $this->session->set_flashdata('usuario_codigo', $usu->codigo);

@@ -23,7 +23,7 @@ class acessoController extends CI_Controller {
                         $this->session->set_flashdata('usuario_nome', $usu->nome);
                         $this->session->set_flashdata('usuario_codigo', $usu->codigo);
                         $this->inserir_acesso('N', $usu);
-                        $this->load->view('homeView');
+                        $this->load->view('acessoView');
                     }
                 } else {
 //                echo 'Login ou senha incorretos';
@@ -51,7 +51,7 @@ class acessoController extends CI_Controller {
         $this->inserir_acesso('S', $usu);
         $this->session->set_flashdata('usuario_nome', '');
         $this->session->set_flashdata('usuario_codigo', '');
-        $this->session->set_flashdata('msg', 'Usuario ou senha inválidos');
+        $this->session->set_flashdata('msg', 'Usuário ou senha inválidos');
         if ($this->acessoModel->buscar_erros($usu->codigo) >= 3) {
             $this->acessoModel->bloquear($usu->codigo);
             echo 'Você errou mais de três vezes. Usuário Inativo!';

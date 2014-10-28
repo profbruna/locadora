@@ -59,9 +59,9 @@
                         }
                         ?>
                         <div id="menu">
-                            <ul class="nav nav-tabs nav-stacked"> 
+<!--                            <ul class="nav nav-tabs nav-stacked"> 
                                 <li><?php echo anchor("clienteController/novo", 'Inserir', 'title="Inserir Estado"'); ?></li>                       
-                            </ul>
+                            </ul>-->
                         </div>
                         <h3 class="center"> <?php echo $titulo; ?> </h3> 
                         <hr />

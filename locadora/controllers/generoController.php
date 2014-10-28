@@ -13,7 +13,7 @@ class generoController extends CI_Controller {
             'classificacoes' => $this->generoModel->listarTudo(numRegPagina(), $pagina),
             'paginacao' => criaPaginacao(
                     'generoController', $this->generoModel->contarTudo(), $this->uri->segment(3), 4),
-            'titulo' => "Lista de Classificações");
+            'titulo' => "Lista de Gêneros");
         $this->load->view('generoView', $dados);
     }
 
@@ -52,7 +52,7 @@ class generoController extends CI_Controller {
 
     function alterar_genero($codigo) {
         $this->load->model('generoModel');
-        $dados['titulo'] = "Alteração de Classificação";
+        $dados['titulo'] = "Alteração de Gênero";
         $this->load->model('generoModel');
 
         $dados['genero'] = $this->generoModel->buscar_pelo_codigo($codigo);

@@ -43,7 +43,7 @@ class clienteController extends CI_Controller {
 
         if ($this->clienteModel->inserir($inf)) {
             $this->session->set_flashdata('msg', 'Criado com sucesso!');
-            redirect('../index.php');
+            redirect('clienteController/index/');
         } else {
             $this->session->set_flashdata('msg', 'Não consegui gravar!');
         }
@@ -65,7 +65,7 @@ class clienteController extends CI_Controller {
             $_POST['codigo'] = $codigo;
             if ($this->clienteModel->alterar($_POST)) {
                 $this->session->set_flashdata('msg', 'Alterado com sucesso!');
-                redirect('../index.php');
+                redirect('clienteController/index/');
             }
         }
         $this->load->view('clienteUpdateView', $dados);
@@ -77,7 +77,7 @@ class clienteController extends CI_Controller {
         $del = $this->clienteModel->eliminar();
         if ($del > 0) {
             $this->session->set_flashdata('msg', 'Eliminado com sucesso!');
-            redirect('../index.php');
+            redirect('clienteController/index/');
         }
     }
 

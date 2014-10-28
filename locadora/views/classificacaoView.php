@@ -38,10 +38,16 @@
         <header class="container-fluid"> 
             <div class="row-fluid"> 
                 <div class="span12"> 
+                    <div id="menu_topo">
+                        <?php require_once 'locadora/views/menuView.php'; ?>
+                    </div>
+                    <div id="menu_topo1">
+                        <?php require_once 'locadora/views/listaView.php'; ?>
+                    </div>
                     <div class="navbar"> 
                         <div class="navbar-inner"> 
                             <div class="container"> 
-                                <h2 class="center">Cadastro de Gêneros</h2> 
+                                 
                             </div> 
                         </div> 
                     </div> 
@@ -55,6 +61,8 @@
                 <!-- COLUNA OCUPANDO 2 ESPAÇOS NO GRID -->         
                 <div class="span12">
                     <div class="well">
+                        <h3 class="center"> <?php echo $titulo; ?> </h3> 
+                        <hr />
                         <?php if ($this->session->flashdata('msg')) { ?>
                             <div class="alert ajuste">
                                 <button type="button" class="close" data-dismiss="alert">×</button>
@@ -74,13 +82,12 @@
                         ?>
                         
                         <div id="menu">
-                            <ul class="nav nav-tabs nav-stacked"> 
+<!--                            <ul class="nav nav-tabs nav-stacked"> 
                                 <li><?php echo anchor("classificacaoController/novo", 'Inserir'); ?></li>                       
-                            </ul>
+                            </ul>-->
                             
                         </div>
-                        <h3 class="center"> <?php echo $titulo; ?> </h3> 
-                        <hr />
+                        
                         
                         <?php
                         echo $this->table->generate();

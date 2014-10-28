@@ -47,14 +47,14 @@
                     <div class="well">
                         <?php if ($this->session->flashdata('msg')) { ?>
                             <div class="alert ajuste">
-                                <button type="button" class="close" data-dismiss="alert">Ã—</button>
+                                <button type="button" class="close" data-dismiss="alert">x</button>
                                 <?php echo $this->session->flashdata('msg'); ?>
                             </div>
                             <?php
                         }
 
                         
-                        $this->table->set_heading('CÃ³digo', 'Nome', 'AÃ§Ãµes');
+                        $this->table->set_heading('Código', 'Nome', 'Ações');
                         foreach ($cidades as $c) {
                             $link_alterar = anchor("cidadeController/alterar_cidade/$c->codigo", 'Editar', 'title="Editar"');
                             $link_eliminar = anchor("cidadeController/eliminar_cidade/$c->codigo", 'Excluir', 'title="Excluir"');                   
@@ -65,9 +65,9 @@
                         ?>
                         
                         <div id="menu">
-                            <ul class="nav nav-tabs nav-stacked"> 
+<!--                            <ul class="nav nav-tabs nav-stacked"> 
                                 <li><?php echo anchor("cidadeController/novo", 'Inserir'); ?></li>                       
-                            </ul>
+                            </ul>-->
                             
                         </div>
                         <h3 class="center"> <?php echo $titulo; ?> </h3> 

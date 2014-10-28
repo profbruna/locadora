@@ -37,10 +37,16 @@
         <header class="container-fluid"> 
             <div class="row-fluid"> 
                 <div class="span12"> 
+                    <div id="menu_topo">
+                        <?php require_once 'locadora/views/menuView.php'; ?>
+                    </div>
+                    <div id="menu_topo1">
+                        <?php require_once 'locadora/views/listaView.php'; ?>
+                    </div>
                     <div class="navbar"> 
                         <div class="navbar-inner"> 
                             <div class="container"> 
-                                <h2 class="center" style="margin-top: -100px;"><?php echo $titulo; ?></h2> 
+
                             </div> 
                         </div> 
                     </div> 
@@ -48,14 +54,18 @@
             </div> 
         </header> 
         <!-- / HEADER -->
-        <div class="container-fluid"> 
+        <div class="container-fluid">
+
             <!-- CLASSE PARA DEFINIR UMA LINHA --> 
             <div class="row-fluid"> 
+
                 <!-- COLUNA OCUPANDO 2 ESPAÇOS NO GRID -->         
                 <div class="span12">
+
                     <div class="well">
 
-
+                        <h3 class="center"> <?php echo $titulo; ?> </h3> 
+                        <hr />
 
                         <?php
                         if ($this->session->flashdata('msg')) {

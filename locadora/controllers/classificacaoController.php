@@ -34,7 +34,7 @@ class classificacaoController extends CI_Controller {
 
         $cont = strlen($inf['nome']);
 
-        if ($inf['nome'] == '0') {
+        if ($inf['nome'] == '0' || 'o') {
             $this->session->set_flashdata('msg', 'Campo "Nome" não pode ser preenchido com valor "0".');
         } else {
             if ($cont < 5) {

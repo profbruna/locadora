@@ -20,7 +20,7 @@ class acessoController extends CI_Controller {
                     $this->session->set_flashdata('usuario_codigo', $usu->codigo);
                     $this->inserir_acesso('N', $usu);
                     echo 'conectou';
-                    redirect('usuarioController'); 
+                    redirect('homeView'); 
                 }
             } else {
                 $this->erro_acesso($usu);

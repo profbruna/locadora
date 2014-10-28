@@ -20,8 +20,8 @@ class locacaoProdController extends CI_Controller {
 
     function novo() {
         $dados['titulo'] = "Cadastro de Locação de Produtos";
-       // $this->load->model('produtoModel');
-       //$dados['produtos'] = $this->produtoModel->listarTudo();
+        $this->load->model('produtoModel');
+        $dados['produtos'] = $this->produtoModel->listarTudo();
 
         $this->load->view('locacaoProdFormView', $dados);
     }
@@ -62,21 +62,26 @@ class locacaoProdController extends CI_Controller {
         }
     }
 
-    function alterar_produto($locacao_codigo,$produto_codigo) {
+    function alterar_produto($locacao_codigo, $produto_codigo) {
         $this->load->model('locacaoProdModel');
+        $this->load->model('produtoModel');
+        $dados['produtos'] = $this->produtoModel->listarTudo();
         $dados['titulo'] = "Alteração de Locação de Produto";
-        $dados['loc'] = $this->locacaoProdModel->buscar_pelo_codigo($locacao_codigo,$produto_codigo);
+        
+        $dados['loc'] = $this->locacaoProdModel->buscar_pelo_codigo($locacao_codigo, $produto_codigo);
 
-        $this->form_validation->set_rules('data', 'data', 'trim|required');
-        $this->form_validation->set_rules('valor', 'valor', 'trim|required');
-        $this->form_validation->set_rules('observacoes', 'observacoes', 'trim|required');
-        $this->form_validation->set_rules('cliente_codigo', 'cliente_codigo', 'trim|required');
-        $this->form_validation->set_rules('condicao_pagamento_codigo', 'condicao_pagamento_codigo', 'trim|required');
+        $this->form_validation->set_rules('locacao_codigo', 'locacao_codigo', 'trim|required');
+        $this->form_validation->set_rules('produto_codigo', 'produto_codigo', 'trim|required');
+        $this->form_validation->set_rules('quantidade', 'quantidade', 'trim|required');
+        $this->form_validation->set_rules('data_devolucao', 'data_devolucao', 'trim|required');
+      
 
         if ($this->form_validation->run()) {
             $_POST['data_devolucao'] = implode('-', array_reverse(explode('/', $_POST['data_devolucao'])));
 
-            $_POST['codigo'] = $codigo;
+            $_POST['produto_codigo'] = $produto_codigo;
+            $_POST['locacao_codigo'] = $locacao_codigo;
+            
             if ($this->locacaoProdModel->alterar($_POST)) {
                 $this->session->set_flashdata('msg', 'Alterado com sucesso!');
                 redirect('locacaoProdController');
@@ -88,11 +93,11 @@ class locacaoProdController extends CI_Controller {
         $this->load->view('locacaoProdUpdateView', $dados);
     }
 
-    function excluir_produto($locacao_codigo,$produto_codigo) {
-         $this->load->model('locacaoProdModel');
+    function excluir_produto($locacao_codigo, $produto_codigo) {
+        $this->load->model('locacaoProdModel');
 
 
-        if ($this->locacaoProdModel->excluir($locacao_codigo,$produto_codigo)) {
+        if ($this->locacaoProdModel->excluir($locacao_codigo, $produto_codigo)) {
             $this->session->set_flashdata('msg', 'Excluído com Sucesso');
             redirect('locacaoProdController');
         } else {

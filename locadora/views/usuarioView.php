@@ -1,35 +1,85 @@
 <html>
     <head>
-        <title></title>
-         <meta charset="utf-8"/>
-        <link rel="stylesheet" href="http://127.0.0.1/locadora/locadora/views/css/estilo.css" type="text/css"/>
+        <meta charset="utf-8"/>  
+
+        <!-- JQUERY --> 
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
+        <script>window.jQuery || document.write('<script src="js/jquery-1.7.1.min.js"><\/script>')</script> 
+        <!-- TWITTER BOOTSTRAP CSS --> 
+
+        <link href="<?php echo base_url('locadora/views/css/bootstrap.css') ?>" rel="stylesheet" type="text/css"/>  
+        <link href="<?php echo base_url('locadora/views/css/estilo.css') ?>" rel="stylesheet" type="text/css"/>
+        <!-- TWITTER BOOTSTRAP JS --> 
+        <script src="<?php echo base_url('locadora/views/jquery/js/bootstrap.min.js') ?>"></script>       
+        <script src="<?php echo base_url('locadora/views/jquery/css/ui-lightness/jquery-ui-1.10.4.custom.css') ?>"></script>       
+        <script type="text/javascript" src="<?php echo base_url('locadora/views/jquery/js/jquery-1.9.1.js') ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('locadora/views/jquery/js/jquery-ui.js') ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('locadora/views/jquery/js/jquery.maskMoney.js') ?>"></script>  
     </head>
     <body>
-         <?php 
-        echo anchor("usuarioController/novo", "Inserir um novo Usuário",'class="novo"');
-        echo '<br>';
-        echo '<br>';
-       
-        if($this->session->flashdata('msg')){
-            echo $this->session->flashdata('msg');
-        }
-        
-        
-        $this->table->set_heading('Nome', 'Login', 'E-mail', 'Senha', 'Inativo', 'Ações');    
- foreach ($usuarios as $p){
-     
-     $link_alterar = anchor("usuarioController/alterar_usuario/$p->codigo", "Alterar");
-     $link_eliminar = anchor("usuarioController/eliminar_usuario/$p->codigo", "Eliminar");
- 
-     $this->table->add_row($p->nome, $p->login, $p->email,  $p->senha, $p->inativo, "$link_alterar $link_eliminar ");
-     
- }
-        
-   echo $this->table->generate();   
-   
-   ?>
+    <body>
+        <!-- HEADER --> 
+        <header class="container-fluid"> 
+            <div class="row-fluid"> 
+                <div class="span12">
+                    <div id="menu_topo">
+                        <?php require_once 'locadora/views/menuView.php'; ?>
+                    </div>
+                    <div class="navbar"> 
+                        <div class="navbar-inner"> 
+                            <div class="container"> 
+                                <h2 class="center">Lista de Usuários</h2> 
+                            </div> 
+                        </div> 
+                    </div> 
+                </div> 
+            </div> 
+        </header> 
+        <!-- / HEADER -->
+        <div class="container-fluid"> 
+            <!-- CLASSE PARA DEFINIR UMA LINHA --> 
+            <div class="row-fluid"> 
+                <!-- COLUNA OCUPANDO 2 ESPAÇOS NO GRID -->         
+                <div class="span12">
+                    <div class="well">
+                        <?php
+                        echo anchor("usuarioController/novo", "Inserir um novo Usuário", 'class="novo"');
+                        echo '<br>';
+                        echo '<br>';
+
+                        if ($this->session->flashdata('msg')) {
+                            echo $this->session->flashdata('msg');
+                        }
+
+
+                        $this->table->set_heading('Nome', 'Login', 'E-mail', 'Senha', 'Inativo', 'Ações');
+                        foreach ($usuarios as $p) {
+
+                            $link_alterar = anchor("usuarioController/alterar_usuario/$p->codigo", "Alterar");
+                            $link_eliminar = anchor("usuarioController/eliminar_usuario/$p->codigo", "Eliminar");
+
+                            $this->table->add_row($p->nome, $p->login, $p->email, $p->senha, $p->inativo, "$link_alterar $link_eliminar ");
+                        }
+
+                        echo $this->table->generate();
+                        ?>
+
+                        <!--<h3 class="center"> Lista de Clientes </h3>--> 
+                        <hr />
+
+
+                        <hr/>
+                        <div class="pagination pagination-centered">
+<?php
+echo $paginacao;
+?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>                
     </body>
-       
+
 </html>
 
 

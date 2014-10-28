@@ -11,27 +11,22 @@ class acessoController extends CI_Controller {
         $this->load->model('acessoModel');
         $usu = $this->acessoModel->valida_usuario($_POST);
 
-        if (!$usu) {
-            echo 'login inválido';
-            redirect('acessoController');
-        } else {
-            if ($usu->login != "") {
-                if ($usu->senha == $_POST ['senha']) {
-                    if ($usu->inativo == 'S') {
-                        echo 'Usuário Inativo';
-                    } else {
-                        $this->session->set_flashdata('usuario_nome', $usu->nome);
-                        $this->session->set_flashdata('usuario_codigo', $usu->codigo);
-                        $this->inserir_acesso('N', $usu);
-                        $this->load->view('acessoView');
-                    }
+        if ($usu->nome != "") {
+            if ($usu->senha == $_POST ['senha']) {
+                if ($usu->inativo == 'S') {
+                    echo 'Usuario Inativo';
                 } else {
-//                echo 'Login ou senha incorretos';
-                    $this->erro_acesso($usu);
+                    $this->session->set_flashdata('usuario_nome', $usu->nome);
+                    $this->session->set_flashdata('usuario_codigo', $usu->codigo);
+                    $this->inserir_acesso('N', $usu);
+                    echo 'conectou';
+                    redirect('usuarioController'); 
                 }
             } else {
                 $this->erro_acesso($usu);
             }
+        } else {
+            $this->erro_acesso($usu);
         }
     }
 
@@ -51,10 +46,10 @@ class acessoController extends CI_Controller {
         $this->inserir_acesso('S', $usu);
         $this->session->set_flashdata('usuario_nome', '');
         $this->session->set_flashdata('usuario_codigo', '');
-        $this->session->set_flashdata('msg', 'Usuário ou senha inválidos');
+        $this->session->set_flashdata('msg', 'Usuario ou senha inválidos');
         if ($this->acessoModel->buscar_erros($usu->codigo) >= 3) {
             $this->acessoModel->bloquear($usu->codigo);
-            echo 'Você errou mais de três vezes. Usuário Inativo!';
+            echo 'Acesso bloqueado dirija-se a sua agência bancária!';
         }
         $this->load->view('acessoView');
     }

@@ -9,21 +9,29 @@ class produtoController extends CI_Controller{
         $this->load->model('produtoModel');
         $pagina = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
         $dados = array(
-            'produtos' => $this->produtodoModel->listarTudo(numRegPagina(), $pagina), 
+            'produtos' => $this->produtoModel->listarTudo(numRegPagina(), $pagina), 
             'paginacao' => criaPaginacao(
-            'produtoController', $this->produtodoModel->contarTudo(), $this->uri->segment(3), 3),
+            'produtoController', $this->produtoModel->contarTudo(), $this->uri->segment(3), 3),
             'titulo' => "Lista de Produtos");
         $this->load->view('produtoView', $dados);
     }
     
     function novo(){
-        $this->load->model('produtodoModel');
+        $this->load->model('produtoModel');
         $dados['titulo'] = "Cadastro de Produtos";
+        
+        $this->load->model('generoModel');
+        $this->load->model('classificacaoModel');
+        $this->load->model('tipoModel');
+        $dados['generos'] = $this->generoModel->listarTudo();
+        $dados['classificacoes'] = $this->classificacaoModel->listarTudo();
+        $dados['tipos'] = $this->tipoModel->listarTudo();
+        
         $this->load->view('produtoFormView', $dados);
     }
     function inserir_produto(){
         $this->load->model('produtoModel');
-        
+       
         $inf = array(
             'codigo' => $this->input->post('codigo'),
             'nome' => $this->input->post('nome'),
@@ -53,6 +61,13 @@ class produtoController extends CI_Controller{
         $dados['titulo'] = "Alteração de Produtos";
         $dados['produto'] = $this->produtoModel->buscar_pelo_codigo($codigo);
         
+        $this->load->model('generoModel');
+        $this->load->model('classificacaoModel');
+        $this->load->model('tipoModel');
+        $dados['generos'] = $this->generoModel->listarTudo();
+        $dados['classificacoes'] = $this->classificacaoModel->listarTudo();
+        $dados['tipos'] = $this->tipoModel->listarTudo();
+        
         $this->form_validation->set_rules('codigo', 'codigo', 'trim');
         $this->form_validation->set_rules('nome', 'nome', 'trim');
         $this->form_validation->set_rules('quantidade', 'quantidade', 'trim');
@@ -79,9 +94,12 @@ class produtoController extends CI_Controller{
     function eliminar_produto(){
         $this->load->model('produtoModel');
             $del = $this->produtoModel->eliminar();
+            
+            
             if ($del > 0){
                 $this->session->set_flashdata('msg', 'Eliminado com sucesso!');
-                redirect('produtoController/index.php');
+                redirect('produtoController/index');
+                
             }
         }
     }

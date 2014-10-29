@@ -7,15 +7,16 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
         <script>window.jQuery || document.write('<script src="js/jquery-1.7.1.min.js"><\/script>')</script> 
         <!-- TWITTER BOOTSTRAP CSS --> 
-        
-        <link href="<?php echo base_url('locadora/views/css/bootstrap.css') ?>" rel="stylesheet" type="text/css"/>  
-        <link href="<?php echo base_url('locadora/views/css/estilo.css') ?>" rel="stylesheet" type="text/css"/>
+
+        <link href="http://127.0.0.1/locadora/locadora/views/css/bootstrap.css" rel="stylesheet" type="text/css"/>  
+        <link href="http://127.0.0.1/locadora/locadora/views/css/estilo.css" rel="stylesheet" type="text/css"/>
         <!-- TWITTER BOOTSTRAP JS --> 
-        <script src="<?php echo base_url('locadora/views/jquery/js/bootstrap.min.js') ?>"></script>       
-        <script src="<?php echo base_url('locadora/views/jquery/css/ui-lightness/jquery-ui-1.10.4.custom.css') ?>"></script>       
-        <script type="text/javascript" src="<?php echo base_url('locadora/views/jquery/js/jquery-1.9.1.js') ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('locadora/views/jquery/js/jquery-ui.js') ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('locadora/views/jquery/js/jquery.maskMoney.js') ?>"></script>
+        <script src="http://127.0.0.1/locadora/locadora/views/jquery/js/bootstrap.min.js"></script>       
+        <script src="http://127.0.0.1/locadora/locadora/views/jquery/css/ui-lightness/jquery-ui-1.10.4.custom.css"></script>       
+        <script type="text/javascript" src="http://127.0.0.1/locadora/locadora/views/jquery/js/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="http://127.0.0.1/locadora/locadora/views/jquery/js/jquery-ui.js"></script>
+        <script type="text/javascript" src="http://127.0.0.1/locadora/locadora/views/jquery/js/jquery.maskMoney.js"></script>
+        <script type="text/javascript" src="http://127.0.0.1/locadora/includes/jquery/js/jquery-ui-timepicker-addon.js"></script>
         <script type="text/javascript">
             $(document).ready(function(e) {
                 $("#datepicker").datepicker({
@@ -33,15 +34,22 @@
 
         </script>    
     </head>
+
     <body>
         <!-- HEADER --> 
         <header class="container-fluid"> 
             <div class="row-fluid"> 
                 <div class="span12"> 
+                    <div id="menu_topo">
+                        <?php require_once 'locadora/views/menuView.php'; ?>
+                    </div>
+                    <div id="menu_topo1">
+                        <?php require_once 'locadora/views/listaView.php'; ?>
+                    </div>
                     <div class="navbar"> 
                         <div class="navbar-inner"> 
                             <div class="container"> 
-                                <h2 class="center"><?php echo $titulo; ?></h2> 
+
                             </div> 
                         </div> 
                     </div> 
@@ -55,7 +63,8 @@
                 <!-- COLUNA OCUPANDO 2 ESPAÇOS NO GRID -->         
                 <div class="span12">
                     <div class="well">
-
+                        <h3 class="center"> <?php echo $titulo; ?> </h3> 
+                        <hr />
 
 
                         <?php
@@ -63,7 +72,7 @@
                             echo $this->session->flashdata('msg');
                         }
 
-                        echo form_open('produtoController/inserir_cliente');
+                        echo form_open('produtoController/inserir_produto');
                         echo form_fieldset('Informações dos Produtos');
                         ?>
                         <form class="form-horizontal">
@@ -90,47 +99,47 @@
                                 echo br();
 
                                 echo form_label("Inativo: ");
-                                echo form_input('inativo', '', 'size="50" class="campo" required');
+                                echo form_checkbox('inativo', 'S', FALSE, 'size="50" class="campo"');
                                 echo br();
-                                
+
                                 echo form_label("Data Cadastro: ");
-                                echo form_input('data_cadastro', '', 'size="50" class="campo" required');
+                                echo form_input('data_cadastro', '', 'size="50" class="campo" required id="datepicker"');
                                 echo br();
-                                
+
                                 echo form_label("Numero Serie: ");
-                                echo form_input('numero_serie', '', 'size="50" class="campo" required');
+                                echo form_input('numero_serie', '', 'size="50" class="campo" required ');
                                 echo br();
-                                
+
                                 echo form_label("Detalhes: ");
                                 echo form_input('detalhes', '', 'size="50" class="campo" required');
                                 echo br();
 
                                 echo form_label("Genero Codigo: ");
                                 $listagem = array('' => 'Selecione o Genero');
-                                foreach ($genero_codigo as $e) {
+                                foreach ($generos as $e) {
                                     $listagem[$e->codigo] = "$e->codigo - $e->nome";
                                 }
                                 echo form_dropdown('genero_codigo', $listagem, set_value('genero_codigo', @$generoAtual), 'required');
                                 echo br();
-                                
+
                                 echo form_label("Classificação Codigo: ");
                                 $listagem = array('' => 'Selecione a Classificaçâo');
-                                foreach ($classificacao_codigo as $e) {
+                                foreach ($classificacoes as $e) {
                                     $listagem[$e->codigo] = "$e->codigo - $e->nome";
                                 }
                                 echo form_dropdown('classificacao_codigo', $listagem, set_value('classificacao_codigo', @$classificacaoAtual), 'required');
                                 echo br();
-                                
+
                                 echo form_label("Tipo Codigo: ");
                                 $listagem = array('' => 'Selecione o Tipo');
-                                foreach ($tipo_codigo as $e) {
+                                foreach ($tipos as $e) {
                                     $listagem[$e->codigo] = "$e->codigo - $e->nome";
                                 }
                                 echo form_dropdown('tipo_codigo', $listagem, set_value('tipo_codigo', @$tipoAtual), 'required');
                                 echo br();
-                                
+
                                 echo form_label("Dias Devolução: ");
-                                echo form_input('dias_devolucao', '', 'size="50" class="campo" required');
+                                echo form_input('dias_devolucao', '', 'size="5" class="campo" required');
                                 echo br();
 
                                 echo form_submit('submit', 'Enviar', 'class="botao1"');

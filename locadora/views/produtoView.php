@@ -1,8 +1,110 @@
-<?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8"> 
+        <title><?php echo $titulo; ?></title> 
+        <!-- JQUERY --> 
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
+        <script>window.jQuery || document.write('<script src="js/jquery-1.7.1.min.js"><\/script>')</script> 
+        <!-- TWITTER BOOTSTRAP CSS --> 
+        <link href="<?php echo base_url('locadora/views/css/bootstrap.css') ?>" rel="stylesheet" type="text/css"/>  
+        <link href="<?php echo base_url('locadora/views/css/estilo.css') ?>" rel="stylesheet" type="text/css"/>
+        <!-- TWITTER BOOTSTRAP JS --> 
+        <script src="<?php echo base_url('locadora/views/jquery/js/bootstrap.min.js') ?>"></script> 
 
+
+    </head>
+    <body>
+        <!-- HEADER --> 
+        <header class="container-fluid"> 
+            <div class="row-fluid"> 
+                <div class="span12">
+                    <div id="menu_topo">
+                        <?php require_once 'locadora/views/menuView.php'; ?>
+                    </div>
+                    <div id="menu_topo1">
+                       <?php require_once 'locadora/views/listaView.php'; ?>
+                    </div>
+                    <div class="navbar"> 
+                        <div class="navbar-inner"> 
+                            <div class="container"> 
+                                
+                            </div>
+                        </div> 
+                    </div> 
+                </div> 
+            </div> 
+        </header> 
+        <!-- / HEADER -->
+        <div class="container-fluid"> 
+            <!-- CLASSE PARA DEFINIR UMA LINHA --> 
+            <div class="row-fluid"> 
+                <!-- COLUNA OCUPANDO 2 ESPAÇOS NO GRID -->         
+                <div class="span12">
+                    <div class="well">
+                        <?php if ($this->session->flashdata('msg')) { ?>
+                            <div class="alert ajuste">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <?php echo $this->session->flashdata('msg'); ?>
+                            </div>
+                            <?php
+                        }
+                        $this->table->set_heading('Nome', 
+                                'Quantidade', 
+                                'Qtde Locado', 
+                                'Qtde Disponivel', 
+                                'Valor', 
+                                'Inativo', 
+                                'Data Cadastro', 
+                                'Nr Serie', 
+                                'Detalhes', 
+                                'Genero', 
+                                'Classificação', 
+                                'Tipo',
+                                'Dias Dev.',
+                                'Ações');
+                        foreach ($produtos as $p) {
+                            $link_alterar = anchor("produtoController/alterar_produto/$p->codigo", 'Editar', 'title="Editar"');
+                            $link_eliminar = anchor("produtoController/eliminar_produto/$p->codigo", 'Excluir', 'title="Excluir"');
+                            
+
+                            $this->table->add_row($p->nome, 
+                                    $p->quantidade, 
+                                    $p->quantidade_locado, 
+                                    $p->quantidade_disponivel, 
+                                    $p->valor, 
+                                    $p->inativo, 
+                                    $p->data_cadastro,
+                                    $p->numero_serie, 
+                                    $p->detalhes, 
+                                    $p->genero_codigo, 
+                                    $p->classificacao_codigo, 
+                                    $p->tipo_codigo,  
+                                    $p->dias_devolucao,
+                                    "$link_alterar $link_eliminar");
+                        }
+                        ?>
+                        <div id="menu">
+                            <!--<ul class="nav nav-tabs nav-stacked"> 
+                                <li><?php echo anchor("produtoController/novo", 'Inserir', 'title="Inserir Produto"'); ?></li>                       
+                            </ul>-->
+                        </div>
+                        <h3 class="center"> <?php echo $titulo; ?> </h3> 
+                        <hr />
+
+                        <?php
+                        echo $this->table->generate();
+                        ?>
+
+                        <hr/>
+                        <div class="pagination pagination-centered">
+                            <?php
+                            echo $paginacao;
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -25,14 +25,10 @@
                     <div id="menu_topo">
                         <?php require_once 'locadora/views/menuView.php'; ?>
                     </div>
-                    <div id="menu_topo1">
-                       <?php require_once 'locadora/views/listaView.php'; ?>
-                    </div>
-                    
                     <div class="navbar"> 
                         <div class="navbar-inner"> 
                             <div class="container"> 
-                               
+                                <h2 class="center">Lista de Usuários</h2> 
                             </div> 
                         </div> 
                     </div> 
@@ -46,10 +42,8 @@
                 <!-- COLUNA OCUPANDO 2 ESPAÇOS NO GRID -->         
                 <div class="span12">
                     <div class="well">
-                         <h3 class="center"> <?php echo $titulo; ?> </h3> 
-                        <hr />
                         <?php
-                        
+                        echo anchor("usuarioController/novo", "Inserir um novo Usuário", 'class="novo"');
                         echo '<br>';
                         echo '<br>';
 
@@ -70,7 +64,8 @@
                         echo $this->table->generate();
                         ?>
 
-                      
+                        <!--<h3 class="center"> Lista de Clientes </h3>--> 
+                        <hr />
 
 
                         <hr/>

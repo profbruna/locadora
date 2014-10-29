@@ -22,16 +22,10 @@
         <header class="container-fluid"> 
             <div class="row-fluid"> 
                 <div class="span12"> 
-                     <div id="menu_topo">
-                        <?php require_once 'locadora/views/menuView.php'; ?>
-                    </div>
-                    <div id="menu_topo1">
-                       <?php require_once 'locadora/views/listaView.php'; ?>
-                    </div>
                     <div class="navbar"> 
                         <div class="navbar-inner"> 
                             <div class="container"> 
-                                 
+                                <h2 class="center"><?php echo $titulo; ?></h2> 
                             </div> 
                         </div> 
                     </div> 
@@ -45,7 +39,7 @@
                 <!-- COLUNA OCUPANDO 2 ESPAÇOS NO GRID -->         
                 <div class="span12">
                     <div class="well">
-        
+        <h1><?php echo $titulo; ?></h1>
         <?php
         $codigo = 0;
         $codigo = @$financeiro->codigo;

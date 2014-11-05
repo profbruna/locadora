@@ -32,6 +32,9 @@
             <ul class="nav nav-tabs nav-stacked"> 
                 <li style="margin-left: 970px; margin-top: -130px;"><?php echo anchor("usuarioController/index", 'Listar Usuário', 'title="Listar Usuário"', 'class="novo"'); ?></li>                       
             </ul>
+            <ul class="nav nav-tabs nav-stacked"> 
+                <li style="margin-left: 970px; margin-top: -130px;"><?php echo anchor("condicao_pagamentoController/index", 'Listar Cond. Pagamento', 'title="Listar Cond. Pagamento"', 'class="novo"'); ?></li>                       
+            </ul>
         </div>
     </body>
 </html>
